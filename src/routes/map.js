@@ -8,8 +8,18 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+const village = L.tileLayer(
+	'http://wmts.nlsc.gov.tw/wmts/Village/default/GoogleMapsCompatible/{z}/{y}/{x}',
+	{
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}
+).addTo(map);
+
 const data = rank.filter((row) => row.lat && row.lng);
+
 L.Icon.Default.imagePath = 'images/';
+
 for (const row of data) {
 	let popupContent = `<img src="${row.imgUrl}" width="250px"/>`;
 	popupContent += `<ul><li>a1分數：${row.rankA1}</li><li>b1分數：${row.rankB1}</li><li>c1分數：${row.rankC1}</li></ul>`;
