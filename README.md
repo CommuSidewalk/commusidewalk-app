@@ -1,28 +1,16 @@
-# create-svelte
+# commusidewalk app
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+平安走路許願帳戶互動式地圖 Web App
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- [主文件](https://docs.google.com/document/d/1b_00BjDMkuyZISHzfEKU9DDw32BqmQ95k-O-bshxBQ0/edit)
+- [本程式文件](https://docs.google.com/document/d/1rU3uT3WfwCt3sVCViWHzoIisY5P64AMGAUk9i2fiSEM/edit#)
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once you've cloned a project and installed dependencies with `yarn`, start a development server:
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+yarn dev
 ```
 
 ## Building
@@ -30,9 +18,5 @@ npm run dev -- --open
 To create a production version of your app:
 
 ```bash
-npm run build
+yarn build
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
