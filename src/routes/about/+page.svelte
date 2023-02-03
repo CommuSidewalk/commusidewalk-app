@@ -25,6 +25,9 @@
 	</ul>
 	<p>地圖上的點位著色是以 a1 加權法為基準。</p>
 
+  <h2>資料更新時間</h2>
+  <span>20230203</span>
+
 	<h2>相關連結</h2>
 	<div class="icon-list">
 		<a href="https://www.facebook.com/groups/884215176097253">
@@ -89,6 +92,7 @@
 			</div>
 		</a>
 	</div>
+
 </div>
 
 <style>

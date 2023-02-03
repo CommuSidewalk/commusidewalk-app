@@ -26,6 +26,10 @@ export async function initMap() {
 		'人行道標註資料 &copy; <a href="https://commutag.agawork.tw/dataset?id=63528cc34f042e88cc951433">平安走路許願帳戶-行人庇護空間</a>'
 	);
 
+	map.attributionControl.addAttribution(
+		'資料更新時間：20230203'
+	);
+
 	function rank2Color(rank) {
 		return rank > 8
 			? '#33FF33'

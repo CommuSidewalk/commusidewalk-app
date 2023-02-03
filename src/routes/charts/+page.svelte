@@ -32,6 +32,7 @@
 			{/each}
 		</select>
 	{/if}
+  <div>資料更新時間：20230203</div>
 	<div id="main" />
 </section>
 

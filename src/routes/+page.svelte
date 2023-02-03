@@ -13,7 +13,11 @@
 </svelte:head>
 
 <div id="map" class="map-container" />
-<div class="control-panel">🚧施工中🚧<br />篩選面板</div>
+<div class="control-panel">
+🚧施工中🚧<br />
+篩選面板
+<div>資料更新時間：20230203</div>
+</div>
 
 <style>
 	.map-container {
