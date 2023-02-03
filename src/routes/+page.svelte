@@ -1,11 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-	import { getData } from '$lib/utils/csv.js';
 	import { initMap } from './map.js';
 
 	onMount(async () => {
-		const data = await getData();
-		initMap(data);
+		initMap();
 	});
 </script>
 
