@@ -3,7 +3,7 @@
 	<meta name="description" content="About this app" />
 </svelte:head>
 
-<div class="text">
+<div class="content">
 	<h1>關於本站</h1>
 
 	<p>
@@ -31,8 +31,8 @@
 			<div>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					width="32"
-					height="32"
+					width="24"
+					height="24"
 					fill="currentColor"
 					class="bi bi-facebook"
 					viewBox="0 0 16 16"
@@ -47,7 +47,7 @@
 		<a href="https://commutag.agawork.tw/dataset?id=63528cc34f042e88cc951433">
 			<div>
 				<img
-					style="height:32px"
+					style="height: 24px"
 					src="https://commutag.agawork.tw/static/image/logo.png?v=1.1.5"
 					alt="commutag"
 				/>
@@ -58,8 +58,8 @@
 			<div>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					width="32"
-					height="32"
+					width="24"
+					height="24"
 					fill="currentColor"
 					class="bi bi-github"
 					viewBox="0 0 16 16"
@@ -75,8 +75,8 @@
 			<div>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					width="32"
-					height="32"
+					width="24"
+					height="24"
 					fill="currentColor"
 					class="bi bi-github"
 					viewBox="0 0 16 16"
@@ -92,7 +92,7 @@
 </div>
 
 <style>
-	.text {
+	.content {
 		margin: 10px 50px;
 	}
 
@@ -111,8 +111,8 @@
 		align-items: center;
 		gap: 5px;
 		padding: 10px 20px;
-		background-color: #666;
-		color: #fff;
+		background-color: #eee;
+		color: #333;
 		border-radius: 30px;
 		cursor: pointer;
 		text-align: center;

@@ -22,6 +22,10 @@ export async function initMap() {
 		'村里界圖 &copy; <a href="https://data.gov.tw/dataset/17219">內政部國土測繪中心</a>'
 	);
 
+	map.attributionControl.addAttribution(
+		'人行道標註資料 &copy; <a href="https://commutag.agawork.tw/dataset?id=63528cc34f042e88cc951433">平安走路許願帳戶-行人庇護空間</a>'
+	);
+
 	function rank2Color(rank) {
 		return rank > 8
 			? '#33FF33'
@@ -41,9 +45,10 @@ export async function initMap() {
 			grades = [0, 2, 4, 6, 8, 10],
 			labels = [];
 
+    div.innerHTML += '<div>a1分數</div>'
 		// loop through our density intervals and generate a label with a colored square for each interval
 		for (let i = 0; i < grades.length - 1; i++) {
-			div.innerHTML +=
+			div.innerHTML += 
 				'<i style="background:' +
 				rank2Color(grades[i] + 1) +
 				'"></i> ' +

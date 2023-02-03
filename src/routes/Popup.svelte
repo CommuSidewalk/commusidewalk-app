@@ -2,13 +2,58 @@
 	export let row;
 </script>
 
-<img src={row.imgUrl} width="250px" />
-<div>
-	分數：
-	<ul>
-		<li>a1分數：{row.rankA1}</li>
-		<li>b1分數：{row.rankB1}</li>
-		<li>c1分數：{row.rankC1}</li>
-	</ul>
-</div>
-<div>村里：{row.countyName} {row.townName} {row.villName}</div>
+<section>
+	<img src={row.imgUrl} />
+	<table>
+		<tr>
+			<th>分數</th>
+			<td>a1: {row.rankA1}</td>
+		</tr>
+		<tr>
+			<th />
+			<td>b1: {row.rankB1}</td>
+		</tr>
+		<tr>
+			<th />
+			<td>c1: {row.rankC1}</td>
+		</tr>
+		<tr>
+			<th>村里</th>
+			<td>{row.countyName} {row.townName} {row.villName}</td>
+		</tr>
+		<tr>
+			<th>經緯度</th>
+			<td>{parseFloat(row.lng).toFixed(4)}, {parseFloat(row.lat).toFixed(4)}</td>
+		</tr>
+		<tr>
+			<th>上傳時間</th>
+			<td>{row.createdAt.toLocaleString()}</td>
+		</tr>
+	</table>
+</section>
+
+<style>
+	img {
+		width: 250px;
+		border-radius: 5px;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+	th,
+	td {
+		border: 1px solid #ddd;
+		text-align: left;
+	}
+	th {
+		background-color: #eee;
+		font-weight: bold;
+		width: 30%;
+		vertical-align: middle;
+	}
+	td {
+		width: 80%;
+	}
+</style>
