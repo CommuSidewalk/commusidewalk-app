@@ -18,7 +18,7 @@
 <style>
 	.map-container {
 		flex: 1;
-		height: 100vh;
+		height: calc(100vh - 65px);
 	}
 
 	.control-panel {
@@ -30,4 +30,5 @@
       display: none;
     }
   }
+
 </style>
