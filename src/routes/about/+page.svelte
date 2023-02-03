@@ -3,7 +3,7 @@
 	<meta name="description" content="About this app" />
 </svelte:head>
 
-<div class='text'>
+<div class="text">
 	<h1>關於本站</h1>
 
 	<p>
@@ -55,18 +55,22 @@
 			</svg>
 		</a>
 		<a href="https://commutag.agawork.tw/dataset?id=63528cc34f042e88cc951433">
-      <img style="height:32px" src="https://commutag.agawork.tw/static/image/logo.png?v=1.1.5" alt="commutag" />
+			<img
+				style="height:32px"
+				src="https://commutag.agawork.tw/static/image/logo.png?v=1.1.5"
+				alt="commutag"
+			/>
 		</a>
 	</div>
 </div>
 
 <style>
-  .text {
-    margin: 10px 50px;
-  }
+	.text {
+		margin: 10px 50px;
+	}
 	.icon-list {
 		display: flex;
-    gap: 10px;
+		gap: 10px;
 		align-items: center;
 		list-style: none;
 		margin: 0;

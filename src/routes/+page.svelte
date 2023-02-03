@@ -13,7 +13,7 @@
 </svelte:head>
 
 <div id="map" class="map-container" />
-<div class="control-panel">🚧施工中🚧<br/>篩選面板</div>
+<div class="control-panel">🚧施工中🚧<br />篩選面板</div>
 
 <style>
 	.map-container {
@@ -25,10 +25,9 @@
 		width: 300px;
 	}
 
-  @media (max-width: 520px) {
-    .control-panel {
-      display: none;
-    }
-  }
-
+	@media (max-width: 520px) {
+		.control-panel {
+			display: none;
+		}
+	}
 </style>

@@ -1,16 +1,15 @@
 import * as echarts from 'echarts';
 import _ from 'lodash';
 
-
 export function initChart(data) {
 	// data processing
-  // data counts by county
+	// data counts by county
 	const countyCounts = _.countBy(data, 'countyName');
 	const dataCountsByCounty = _.map(countyCounts, (count, countyName) => {
 		return { countyName, count };
 	});
 
-  // data rank by county
+	// data rank by county
 	const dataRankByCounty = _.chain(data)
 		.groupBy('countyName')
 		.map((value, key) => {
@@ -27,7 +26,7 @@ export function initChart(data) {
 		})
 		.value();
 
-  // data counts by date
+	// data counts by date
 	let temp = _.map(data, (item) => {
 		return { ...item, createdAt: item.createdAt.toDateString() };
 	});
@@ -36,12 +35,12 @@ export function initChart(data) {
 		return { createdAt: new Date(createdAt), count };
 	}).sort((a, b) => a.createdAt > b.createdAt);
 
-  // echarts
+	// echarts
 	const myChart = echarts.init(document.getElementById('main'));
 
-  window.addEventListener('resize', function() {
-    myChart.resize();
-  });
+	window.addEventListener('resize', function () {
+		myChart.resize();
+	});
 
 	const optCountsByCounty = {
 		toolbox: {
@@ -78,14 +77,13 @@ export function initChart(data) {
 	const optRankByCounty = {
 		toolbox: {
 			feature: {
-				dataZoom: {
-					yAxisIndex: 'none'
-				},
+				dataZoom: {},
 				restore: {},
 				saveAsImage: {}
 			}
 		},
 		legend: { bottom: 0 },
+		tooltip: {},
 		dataset: { source: dataRankByCounty },
 		title: {
 			left: 'center',
@@ -112,7 +110,7 @@ export function initChart(data) {
 		]
 	};
 
-  const	optCountsByDate = {
+	const optCountsByDate = {
 		dataset: { source: dataCountsByDate },
 		tooltip: {
 			trigger: 'axis',
@@ -161,19 +159,19 @@ export function initChart(data) {
 		]
 	};
 
-  // default chart
+	// default chart
 	// myChart.setOption(optCountsByCounty);
 
-  const chart = {
-    options: [
-      {text: '人行道評分依縣市', echartsOption: optRankByCounty},
-      {text: '資料數依縣市', echartsOption: optCountsByCounty},
-      {text: '資料數依日期', echartsOption: optCountsByDate},
-    ],
-    select: (option) => {
-      myChart.setOption(option.echartsOption, true)
-    }
-  }
+	const chart = {
+		options: [
+			{ text: '人行道評分依縣市', echartsOption: optRankByCounty },
+			{ text: '資料數依縣市', echartsOption: optCountsByCounty },
+			{ text: '資料數依日期', echartsOption: optCountsByDate }
+		],
+		select: (option) => {
+			myChart.setOption(option.echartsOption, true);
+		}
+	};
 
-  return chart
+	return chart;
 }
