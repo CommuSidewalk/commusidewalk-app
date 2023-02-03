@@ -1,4 +1,67 @@
-@import '@fontsource/fira-mono';
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+body {
+	height: 100vh;
+	margin: 0;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+header {
+	background-color: #449596;
+	color: #fff;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+header span {
+	margin: 0;
+	font-size: 24px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	margin-right: auto;
+}
+
+header span a {
+  text-decoration: none;
+  color: #fff;
+}
+
+@media (max-width: 520px) {
+	header span {
+		display: none;
+	}
+}
+
+header nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+header nav li {
+	margin-right: 20px;
+}
+
+header nav a {
+	color: #fff;
+	text-decoration: none;
+	padding: 10px 20px;
+	border-radius: 20px;
+	transition: all 0.2s ease-in-out;
+}
+
+header nav a:hover {
+	background-color: #3d7c7d;
+	color: #ccc;
+	cursor: pointer;
+}
+
+main {
+	display: flex;
+}
 
 /* :root { */
 /* 	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, */
@@ -15,12 +78,3 @@
 /* 	font-family: var(--font-body); */
 /* 	color: var(--color-text); */
 /* } */
-
-body {
-	height: 100vh;
-	margin: 0;
-}
-
-main {
-	height: 100vh;
-}

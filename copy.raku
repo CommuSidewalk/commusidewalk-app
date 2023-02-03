@@ -1,10 +1,4 @@
-# my $path = '../commusidewalk/output/';
-#
-# for dir($path, test => /:i '.' csv $/) -> $file {
-#   say $file
-# }
-
-my $file = '../commusidewalk/output/rank.json';
-
-mkdir('./src/lib/data');
-move $file, './src/lib/data/data.json';
+my $file = '../commusidewalk/output';
+mkdir('static/data');
+$file = $file.IO.dir.sort(-*.modified)[0];
+copy $file, 'static/data/' ~ $file.basename;
