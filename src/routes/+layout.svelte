@@ -2,6 +2,7 @@
 	import './styles.css';
 	import '$lib/css/leaflet.css';
 	import Tooltip from '$lib/components/Tooltip.svelte';
+	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 </script>
 
 <div class="app">
@@ -18,5 +19,5 @@
 	<main>
 		<slot />
 	</main>
-	<Tooltip text={'資料更新日期：20230203'} />
+	<Tooltip text={'資料更新日期：' + PUBLIC_UPDATE_DATE} />
 </div>

@@ -9,7 +9,7 @@
 
 ## Developing
 
-本站是nodejs寫的，網頁框架為sveltekit，套件管理器是yarn。
+本站是 nodejs 寫的，網頁框架為 sveltekit，套件管理器是 yarn。
 
 Once you've cloned a project and installed dependencies with `yarn`, start a development server:
 

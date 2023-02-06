@@ -3,7 +3,7 @@
 </script>
 
 <section>
-	<img src={row.imgUrl} />
+	<img src={row.imgUrl} alt="人行道照片" />
 	<table>
 		<tr>
 			<th>分數</th>

@@ -1,3 +1,7 @@
+<script>
+	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
+</script>
+
 <svelte:head>
 	<title>關於本站 - 平安走路許願帳戶</title>
 	<meta name="description" content="About this app" />
@@ -25,8 +29,8 @@
 	</ul>
 	<p>地圖上的點位著色是以 a1 加權法為基準。</p>
 
-  <h2>資料更新時間</h2>
-  <span>20230203</span>
+	<h2>資料更新時間</h2>
+	<span>{PUBLIC_UPDATE_DATE}</span>
 
 	<h2>相關連結</h2>
 	<div class="icon-list">
@@ -92,7 +96,6 @@
 			</div>
 		</a>
 	</div>
-
 </div>
 
 <style>

@@ -1,9 +1,11 @@
 <script>
 	import { onMount } from 'svelte';
 	import { initMap } from './map.js';
+	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
+	//	import { Control } from '$lib/components/Control.svelte';
 
 	onMount(async () => {
-		initMap();
+		const map = await initMap();
 	});
 </script>
 
@@ -14,9 +16,11 @@
 
 <div id="map" class="map-container" />
 <div class="control-panel">
-🚧施工中🚧<br />
-篩選面板
-<div>資料更新時間：20230203</div>
+	<!-- <Control {map} /> -->
+	🚧施工中🚧<br />
+	篩選面板
+	<div>資料更新時間：{PUBLIC_UPDATE_DATE}</div>
+	<!-- <div>資料更新時間：20230207</div> -->
 </div>
 
 <style>

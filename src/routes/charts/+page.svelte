@@ -2,6 +2,7 @@
 	import { getData } from '$lib/utils/csv';
 	import { onMount } from 'svelte';
 	import { initChart } from './chart';
+	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 
 	let selected;
 	let chart;
@@ -32,7 +33,7 @@
 			{/each}
 		</select>
 	{/if}
-  <div>資料更新時間：20230203</div>
+	<div>資料更新時間：{PUBLIC_UPDATE_DATE}</div>
 	<div id="main" />
 </section>
 
