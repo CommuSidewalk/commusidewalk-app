@@ -1,46 +1,18 @@
 import * as echarts from 'echarts';
 import _ from 'lodash';
+import { getDataRankByLevel, getDataCountsByCounty, getDataCountsByDate } from './data';
 
-export function initChart(data) {
-	// data processing
-	// data counts by county
-	const countyCounts = _.countBy(data, 'countyName');
-	const dataCountsByCounty = _.map(countyCounts, (count, countyName) => {
-		return { countyName, count };
-	});
-
-	// data rank by county
-	const dataRankByCounty = _.chain(data)
-		.groupBy('countyName')
-		.map((value, key) => {
-			return {
-				countyName: key,
-				count: value.length,
-				meanRankA1: _.meanBy(value, 'rankA1').toFixed(2),
-				meanRankB1: _.meanBy(value, 'rankB1').toFixed(2),
-				meanRankC1: _.meanBy(value, 'rankC1').toFixed(2)
-			};
-		})
-		.filter((item) => {
-			return item.count > 50;
-		})
-		.value();
-
-	// data counts by date
-	let temp = _.map(data, (item) => {
-		return { ...item, createdAt: item.createdAt.toDateString() };
-	});
-	const createdAtCounts = _.countBy(temp, 'createdAt');
-	const dataCountsByDate = _.map(createdAtCounts, (count, createdAt) => {
-		return { createdAt: new Date(createdAt), count };
-	}).sort((a, b) => a.createdAt > b.createdAt);
-
+export async function initChart() {
 	// echarts
 	const myChart = echarts.init(document.getElementById('main'));
 
 	window.addEventListener('resize', function () {
 		myChart.resize();
 	});
+
+	const dataRankByLevel = await getDataRankByLevel();
+	const dataCountsByCounty = await getDataCountsByCounty();
+	const dataCountsByDate = await getDataCountsByDate();
 
 	const optCountsByCounty = {
 		toolbox: {
@@ -68,13 +40,13 @@ export function initChart(data) {
 				type: 'bar',
 				encode: {
 					x: 'count',
-					y: 'countyName'
+					y: 'name'
 				}
 			}
 		]
 	};
 
-	const optRankByCounty = {
+	const optRankByLevel = {
 		toolbox: {
 			feature: {
 				dataZoom: {},
@@ -84,10 +56,10 @@ export function initChart(data) {
 		},
 		legend: { bottom: 0 },
 		tooltip: {},
-		dataset: { source: dataRankByCounty },
+		dataset: { source: dataRankByLevel },
 		title: {
 			left: 'center',
-			text: '人行道評分依縣市'
+			text: '人行道評分依行政區'
 		},
 		xAxis: {},
 		yAxis: { type: 'category' },
@@ -143,11 +115,11 @@ export function initChart(data) {
 			{
 				type: 'inside',
 				start: 0,
-				end: 20
+				end: 100
 			},
 			{
 				start: 0,
-				end: 20
+				end: 100
 			}
 		],
 		series: [
@@ -159,17 +131,20 @@ export function initChart(data) {
 		]
 	};
 
-	// default chart
-	// myChart.setOption(optCountsByCounty);
-
 	const chart = {
 		options: [
-			{ text: '人行道評分依縣市', echartsOption: optRankByCounty },
+			{ text: '人行道評分依行政區', echartsOption: optRankByLevel },
 			{ text: '資料數依縣市', echartsOption: optCountsByCounty },
 			{ text: '資料數依日期', echartsOption: optCountsByDate }
 		],
 		select: (option) => {
 			myChart.setOption(option.echartsOption, true);
+		},
+		updateDataRankByLevel(level, minCount) {
+			getDataRankByLevel(level, minCount).then((source) => {
+				optRankByLevel.dataset.source = source;
+				myChart.setOption(optRankByLevel, true);
+			});
 		}
 	};
 

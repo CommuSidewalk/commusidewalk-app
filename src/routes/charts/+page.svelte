@@ -1,20 +1,30 @@
 <script>
-	import { getData } from '$lib/utils/csv';
 	import { onMount } from 'svelte';
 	import { initChart } from './chart';
 	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
+	import CountySelect from '$lib/components/CountySelect.svelte';
 
 	let selected;
 	let chart;
+	let minCount = 0;
 
 	onMount(async () => {
-		const data = await getData();
-		chart = initChart(data);
+		chart = await initChart();
 		selected = chart.options[0];
 	});
 
 	$: if (selected !== undefined) {
+		console.log(selected);
 		chart.select(selected);
+	}
+
+	function handleSelect(e) {
+		chart?.updateDataRankByLevel(e.detail);
+	}
+
+	function handleMinCount() {
+		console.log('on change');
+		chart?.updateDataRankByLevel(null, minCount);
 	}
 </script>
 
@@ -24,14 +34,32 @@
 </svelte:head>
 
 <section>
+  <div><label for='chart'>圖表</label></div>
 	{#if chart?.options}
-		<select bind:value={selected}>
+		<select name='chart' bind:value={selected}>
 			{#each chart.options as opt}
 				<option value={opt}>
 					{opt.text}
 				</option>
 			{/each}
 		</select>
+		{#if selected?.text === '人行道評分依行政區'}
+			<div class="rank-control">
+				<CountySelect on:select={handleSelect} />
+				<div class="range-container">
+					<div><label for="minCount">最少資料數</label><span>{minCount}</span></div>
+					<input
+						type="range"
+						min="0"
+						max="100"
+						step="1"
+						bind:value={minCount}
+						on:input={handleMinCount}
+						class="range-slider"
+					/>
+				</div>
+			</div>
+		{/if}
 	{/if}
 	<div>資料更新時間：{PUBLIC_UPDATE_DATE}</div>
 	<div id="main" />
@@ -39,15 +67,23 @@
 
 <style>
 	section {
-		margin: 20px 30px;
+		margin: 3vh 2vw;
 	}
 
 	#main {
-		height: 80vh;
-		width: 90vw;
+		height: 50vh;
+		width: 70vw;
+	}
+
+	@media (max-width: 520px) {
+		#main {
+			height: 80vh;
+			width: 90vw;
+		}
 	}
 
 	select {
+    margin: 5px 0;
 		padding: 10px;
 		font-size: 16px;
 		border: none;
@@ -67,5 +103,13 @@
 		height: 0;
 		border: 6px solid transparent;
 		border-color: #333 transparent transparent transparent;
+	}
+
+	.range-container span {
+		margin-left: 10px;
+	}
+
+	.range-container {
+		margin: 10px 0;
 	}
 </style>

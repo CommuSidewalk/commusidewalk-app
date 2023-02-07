@@ -1,9 +1,9 @@
+import { getCountyData } from '$lib/utils/county-data';
 import { getData } from '$lib/utils/csv';
 import Popup from './Popup.svelte';
 
 export async function initMap() {
 	const L = await import('leaflet');
-	L.Icon.Default.imagePath = 'images/';
 	const map = L.map('map', { preferCanvas: true }).setView([25.0596, 121.4951], 13);
 
 	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -63,13 +63,30 @@ export async function initMap() {
 	legend.addTo(map);
 
 	const data = await getData();
+	const countyData = await getCountyData();
+	const allMarker = L.layerGroup();
 	data.forEach(addRow);
 	async function addRow(row) {
 		const marker = L.circleMarker([row.lat, row.lng], {
 			color: rank2Color(row.rankA1),
 			fillOpacity: 0.5
-		}).addTo(map);
+		}).addTo(allMarker);
 
+		countyData.map((c) => {
+			if (row.countyName == c.name) {
+				c.layer.addLayer(marker);
+			}
+			c.towns.map((t) => {
+				if (row.townName == t.name) {
+					t.layer.addLayer(marker);
+				}
+				t.villages.map((v) => {
+					if (row.villName == v.name) {
+						v.layer.addLayer(marker);
+					}
+				});
+			});
+		});
 		marker.bindPopup(() => {
 			const container = L.DomUtil.create('div');
 			new Popup({
@@ -80,5 +97,13 @@ export async function initMap() {
 		});
 	}
 
-	return map;
+	// await Promise.all(
+	// 	data.map(async (row) => {
+	// 		await addRow(row);
+	// 	})
+	// )
+
+	map.addLayer(allMarker);
+
+	return { map, layers: { village, allMarker } };
 }

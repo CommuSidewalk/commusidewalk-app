@@ -100,7 +100,7 @@
 
 <style>
 	.content {
-		margin: 10px 50px;
+		margin: 1vh 3vw;
 	}
 
 	.icon-list {

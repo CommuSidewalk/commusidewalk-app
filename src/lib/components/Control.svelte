@@ -1,21 +1,21 @@
 <script>
-	let yes = false;
 	export let map;
+	export let layers;
+
+	let displayVillage = true;
 
 	$: if (map !== undefined) {
 		map.tile;
 	}
+
+	$: if (displayVillage) {
+		map?.addLayer(layers.village);
+	} else {
+		map?.removeLayer(layers.village);
+	}
 </script>
 
 <label>
-	<input type="checkbox" bind:checked={yes} />
-	Yes! Send me regular email spam
+	<input type="checkbox" bind:checked={displayVillage} />
+	顯示村里界
 </label>
-
-{#if yes}
-	<p>Thank you. We will bombard your inbox and sell your personal details.</p>
-{:else}
-	<p>You must opt-in to continue. If you're not paying, you're the product.</p>
-{/if}
-
-<button disabled={!yes}> Subscribe </button>
