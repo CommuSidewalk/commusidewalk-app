@@ -12,7 +12,7 @@
 
 <svelte:head>
 	<title>地圖 - 平安走路許願帳戶</title>
-	<meta name="description" content="Svelte demo app" />
+	<meta name="description" content="臺灣人行道評分互動式看板" />
 </svelte:head>
 
 <div id="map" class="map-container" />

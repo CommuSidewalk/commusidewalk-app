@@ -2,10 +2,12 @@ import * as Papa from 'papaparse';
 
 let data;
 
-// cb: callback function
-async function getData() {
+// read csv file and convert to js object
+export async function getData() {
 	return new Promise((resolve, reject) => {
-		if (data === undefined) {
+		if (data) {
+      resolve(data);
+		} else {
 			Papa.parse('data/data.csv', {
 				download: true,
 				skipEmptyLines: true,
@@ -26,10 +28,6 @@ async function getData() {
 					resolve(data);
 				}
 			});
-		} else {
-			resolve(data);
 		}
 	});
 }
-
-export { getData };

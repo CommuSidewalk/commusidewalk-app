@@ -4,7 +4,7 @@ import _ from 'lodash';
 // cache
 let data;
 let dataset = {
-	dataRankByLevel: null,
+	dataRankByLevel: null, // no use cache due to interactive results
 	dataCountsByCounty: null,
 	dataCountsByDate: null
 };

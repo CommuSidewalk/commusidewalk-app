@@ -4,9 +4,7 @@ import _ from 'lodash';
 let countyData;
 
 export async function getCountyData() {
-	if (countyData !== undefined) {
-		return countyData;
-	}
+  if (countyData) return countyData;
 
 	const L = await import('leaflet');
 	const data = await getData();

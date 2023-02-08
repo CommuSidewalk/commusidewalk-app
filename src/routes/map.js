@@ -6,11 +6,13 @@ export async function initMap() {
 	const L = await import('leaflet');
 	const map = L.map('map', { preferCanvas: true }).setView([25.0596, 121.4951], 13);
 
+  // base layer
 	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
+  // WMTS 村里界圖層
 	const village = L.tileLayer(
 		'https://wmts.nlsc.gov.tw/wmts/Village/default/GoogleMapsCompatible/{z}/{y}/{x}',
 		{
@@ -21,11 +23,9 @@ export async function initMap() {
 	map.attributionControl.addAttribution(
 		'村里界圖 &copy; <a href="https://data.gov.tw/dataset/17219">內政部國土測繪中心</a>'
 	);
-
 	map.attributionControl.addAttribution(
 		'人行道標註資料 &copy; <a href="https://commutag.agawork.tw/dataset?id=63528cc34f042e88cc951433">平安走路許願帳戶-行人庇護空間</a>'
 	);
-
 	map.attributionControl.addAttribution('資料更新時間：20230207');
 
 	function rank2Color(rank) {

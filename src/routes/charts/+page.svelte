@@ -22,14 +22,13 @@
 	}
 
 	function handleMinCount() {
-		console.log('on change');
 		chart?.updateDataRankByLevel(null, minCount);
 	}
 </script>
 
 <svelte:head>
 	<title>圖表 - 平安走路許願帳戶</title>
-	<meta name="description" content="About this app" />
+	<meta name="description" content="統計圖表" />
 </svelte:head>
 
 <section>
