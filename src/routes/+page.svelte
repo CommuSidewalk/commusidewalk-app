@@ -17,7 +17,9 @@
 
 <div id="map" class="map-container" />
 <div class="control-panel">
-	<Control {...mapControl} />
+	{#if mapControl}
+		<Control {...mapControl} />
+	{/if}
 	<div>資料更新時間：{PUBLIC_UPDATE_DATE}</div>
 </div>
 
