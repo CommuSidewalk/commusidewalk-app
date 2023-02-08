@@ -5,8 +5,8 @@
 </script>
 
 <section>
-	<a href={row.imgUrl} target="_blank" title="在新分頁中開啟圖片">
-		<img class='photo' src={row.imgUrl} alt="人行道照片" />
+	<a href={row.imgUrl} rel="noreferrer" target="_blank" title="在新分頁中開啟圖片">
+		<img class="photo" src={row.imgUrl} alt="人行道照片" />
 	</a>
 	<table>
 		<tr>
@@ -31,9 +31,11 @@
 				>{parseFloat(row.lng).toFixed(4)}, {parseFloat(row.lat).toFixed(4)}<a
 					href={googleMapLink}
 					target="_blank"
-          title="在Google Map中開啟"
+					rel="noreferrer"
+					title="在Google Map中開啟"
 					><img
 						class="google-map-icon"
+						alt="google map icon"
 						src="https://developers.google.com/static/maps/images/maps-icon.svg"
 					/></a
 				></td

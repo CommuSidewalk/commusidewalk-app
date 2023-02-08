@@ -1,8 +1,40 @@
-import * as echarts from 'echarts';
+import * as echarts from 'echarts/core';
+import { BarChart, LineChart } from 'echarts/charts';
+import {
+	DatasetComponent,
+	DataZoomInsideComponent,
+	DataZoomSliderComponent,
+	GridComponent,
+	LegendComponent,
+	TitleComponent,
+	ToolboxComponent,
+	TooltipComponent,
+	TransformComponent
+} from 'echarts/components';
+import { LabelLayout, UniversalTransition } from 'echarts/features';
+import { CanvasRenderer } from 'echarts/renderers';
+
 import _ from 'lodash';
-import { getDataRankByLevel, getDataCountsByCounty, getDataCountsByDate } from './data';
+import { getDataCountsByCounty, getDataCountsByDate, getDataRankByLevel } from './data';
 
 export async function initChart() {
+	echarts.use([
+		TitleComponent,
+		TooltipComponent,
+		ToolboxComponent,
+		LegendComponent,
+		GridComponent,
+		DatasetComponent,
+		DataZoomInsideComponent,
+		DataZoomSliderComponent,
+		TransformComponent,
+		BarChart,
+		LineChart,
+		LabelLayout,
+		UniversalTransition,
+		CanvasRenderer
+	]);
+
 	// echarts
 	const myChart = echarts.init(document.getElementById('main'));
 

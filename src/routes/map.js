@@ -72,6 +72,7 @@ export async function initMap() {
 			fillOpacity: 0.5
 		}).addTo(allMarker);
 
+		// add all markers to corresponding layer (county, town, village)
 		countyData.map((c) => {
 			if (row.countyName == c.name) {
 				c.layer.addLayer(marker);
@@ -96,12 +97,6 @@ export async function initMap() {
 			return container;
 		});
 	}
-
-	// await Promise.all(
-	// 	data.map(async (row) => {
-	// 		await addRow(row);
-	// 	})
-	// )
 
 	map.addLayer(allMarker);
 

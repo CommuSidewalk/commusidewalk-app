@@ -14,7 +14,6 @@
 	});
 
 	$: if (selected !== undefined) {
-		console.log(selected);
 		chart.select(selected);
 	}
 
@@ -34,9 +33,9 @@
 </svelte:head>
 
 <section>
-  <div><label for='chart'>圖表</label></div>
+	<div><label for="chart">圖表</label></div>
 	{#if chart?.options}
-		<select name='chart' bind:value={selected}>
+		<select name="chart" bind:value={selected}>
 			{#each chart.options as opt}
 				<option value={opt}>
 					{opt.text}
@@ -83,7 +82,7 @@
 	}
 
 	select {
-    margin: 5px 0;
+		margin: 5px 0;
 		padding: 10px;
 		font-size: 16px;
 		border: none;
