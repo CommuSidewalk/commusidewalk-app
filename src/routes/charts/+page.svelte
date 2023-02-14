@@ -7,6 +7,7 @@
 	let selected;
 	let chart;
 	let minCount = 0;
+  let level;
 
 	onMount(async () => {
 		chart = await initChart();
@@ -18,11 +19,12 @@
 	}
 
 	function handleSelect(e) {
-		chart?.updateDataRankByLevel(e.detail);
+    level = e.detail
+		chart?.updateDataRankByLevel(level);
 	}
 
 	function handleMinCount() {
-		chart?.updateDataRankByLevel(null, minCount);
+		chart?.updateDataRankByLevel(level, minCount);
 	}
 </script>
 
