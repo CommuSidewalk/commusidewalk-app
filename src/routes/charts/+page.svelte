@@ -69,8 +69,8 @@
 	}
 
 	#main {
-		height: 50vh;
-		width: 70vw;
+		height: 80vh;
+		width: 90vw;
 	}
 
 	@media (max-width: 520px) {
