@@ -32,6 +32,9 @@
     <li>點擊「顯示村里界」核取方塊可以開啟或關閉藍色的村里界圖層。</li>
   </ul>
 	<div>資料更新時間：{PUBLIC_UPDATE_DATE}</div>
+
+  <br/>
+  <div><a href="https://forms.gle/kygHjXtqt2MZa7YK7">回饋表單</a></div>
 </div>
 
 <style>
@@ -42,6 +45,7 @@
 
 	.control-panel {
 		width: 300px;
+    padding: 10px;
 	}
 
 	@media (max-width: 520px) {

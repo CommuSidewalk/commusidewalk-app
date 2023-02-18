@@ -12,3 +12,4 @@ $contents .= subst(/PUBLIC_UPDATE_DATE.*$/, 'PUBLIC_UPDATE_DATE = ' ~ Date.today
 spurt '.env', $contents;
 
 say "copy $file to static/data/data.csv done :)";
+say '.env PUBLIC_UPDATE_DATE ' ~ Date.today.yyyy-mm-dd('') ~ ' updated';
