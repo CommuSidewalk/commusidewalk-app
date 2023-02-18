@@ -1,3 +1,4 @@
+import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 import { getCountyData } from '$lib/utils/county-data';
 import { getData } from '$lib/utils/csv';
 import Popup from './Popup.svelte';
@@ -26,7 +27,7 @@ export async function initMap() {
 	map.attributionControl.addAttribution(
 		'人行道標註資料 &copy; <a href="https://commutag.agawork.tw/dataset?id=63528cc34f042e88cc951433">平安走路許願帳戶-行人庇護空間</a>'
 	);
-	map.attributionControl.addAttribution('資料更新時間：20230207');
+	map.attributionControl.addAttribution('資料更新時間：' + PUBLIC_UPDATE_DATE);
 
 	function rank2Color(rank) {
 		return rank > 8
