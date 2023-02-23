@@ -7,7 +7,7 @@
 
 <div class="app">
 	<header>
-		<span class="title"><a href="/">平安走路許願帳戶 v0.1</a></span>
+		<span class="title"><a href="/">平安走路許願帳戶 v0.2</a></span>
 		<nav>
 			<ul>
 				<li><a href="/">地圖</a></li>
