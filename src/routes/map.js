@@ -1,6 +1,6 @@
 import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 import { getCountyData } from '$lib/utils/county-data';
-import { getData } from '$lib/utils/csv';
+import { parseData } from '$lib/utils/csv';
 import Popup from './Popup.svelte';
 
 export async function initMap() {
@@ -63,7 +63,7 @@ export async function initMap() {
 
 	legend.addTo(map);
 
-	const data = await getData();
+	const data = await parseData();
 	const countyData = await getCountyData();
 	const allMarker = L.layerGroup();
 	data.forEach(addRow);

@@ -53,14 +53,6 @@
 			{/if}
 		</select>
 	</div>
-	<!-- 		<label for="villName"> 村里 </label> -->
-	<!-- 		<select name="villName" bind:value={villName}> -->
-	<!-- 			{#if townName} -->
-	<!-- 				{#each townName?.villages as village} -->
-	<!-- 					<option value={village}>{village.name}</option> -->
-	<!-- 				{/each} -->
-	<!-- 			{/if} -->
-	<!-- 		</select> -->
 {/if}
 
 <style>

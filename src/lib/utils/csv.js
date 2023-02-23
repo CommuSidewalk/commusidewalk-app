@@ -3,7 +3,7 @@ import * as Papa from 'papaparse';
 let data;
 
 // read csv file and convert to js object
-export async function getData() {
+export async function parseData() {
 	return new Promise((resolve, reject) => {
 		if (data) {
 			resolve(data);

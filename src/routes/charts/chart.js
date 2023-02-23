@@ -15,7 +15,7 @@ import { LabelLayout, UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 
 import _ from 'lodash';
-import { getChartDataByName } from './data';
+import { computeChartDataByName } from './data';
 
 export async function initChart() {
 	echarts.use([
@@ -167,23 +167,13 @@ export async function initChart() {
 
 	const chart = {
 		options,
-		select: async (opt, ...args) => {
+		select: async (opt, config) => {
 			myChart.showLoading();
 			let data;
-			if (args.length > 0) {
-				data = await getChartDataByName(opt.text, ...args);
-			} else {
-				data = await getChartDataByName(opt.text);
-			}
+			data = await computeChartDataByName(opt.text, config);
 			opt.echartsOption.dataset.source = data;
 			myChart.setOption(opt.echartsOption, true);
 			myChart.hideLoading();
-		},
-		updateDataRankByLevel(level, minCount) {
-			getDataRankByLevel(level, minCount).then((source) => {
-				optRankByLevel.dataset.source = source;
-				myChart.setOption(optRankByLevel, true);
-			});
 		}
 	};
 

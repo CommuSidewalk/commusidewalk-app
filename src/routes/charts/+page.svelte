@@ -3,14 +3,15 @@
 	import { initChart } from './chart';
 	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 	import CountySelect from '$lib/components/CountySelect.svelte';
-	import { getChartDataByName } from './data';
+	import { computeChartDataByName } from './data';
 	import * as Papa from 'papaparse';
+	import DateRange from '$lib/components/DateRange.svelte';
 
 	let selected;
 	let chart;
 	let minCount = 0;
-	let level;
 	let downloadDisabled = true;
+	let config = {};
 
 	onMount(async () => {
 		chart = await initChart();
@@ -19,26 +20,24 @@
 	});
 
 	$: if (selected !== undefined) {
-		chart?.select(selected);
+		chart?.select(selected, config);
 	}
 
 	function handleSelect(e) {
-		level = e.detail;
-		chart?.select(selected, level);
+		const level = e.detail;
+		config = { ...config, level };
+		chart?.select(selected, config);
 	}
 
 	function handleMinCount() {
-		chart?.select(selected, level, minCount);
+		config = { ...config, minCount };
+		chart?.select(selected, config);
 	}
 
 	async function handleDownload(fileType) {
 		let data;
 		try {
-			if (selected.text === '人行道評分依行政區') {
-				data = await getChartDataByName(selected.text, level, minCount);
-			} else {
-				data = await getChartDataByName(selected.text);
-			}
+			data = await computeChartDataByName(selected.text, config);
 			const link = document.createElement('a');
 
 			switch (fileType) {
@@ -57,6 +56,16 @@
 		} catch (err) {
 			console.error(err);
 		}
+	}
+
+	function handleDateChange(e) {
+		const { start, last } = e.detail;
+		config = { ...config, start, last };
+		chart?.select(selected, {
+			...config,
+			start,
+			last
+		});
 	}
 </script>
 
@@ -79,6 +88,9 @@
 		</select>
 		<button disabled={downloadDisabled} on:click={() => handleDownload('json')}>下載JSON</button>
 		<button disabled={downloadDisabled} on:click={() => handleDownload('csv')}>下載CSV</button>
+		<div>
+			<DateRange on:change={handleDateChange} />
+		</div>
 		<!-- 當圖是「人行道評分依行政區」時 -->
 		{#if selected?.text === '人行道評分依行政區'}
 			<div class="rank-control">

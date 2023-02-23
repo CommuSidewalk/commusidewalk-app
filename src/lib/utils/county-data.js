@@ -1,4 +1,4 @@
-import { getData } from '$lib/utils/csv';
+import { parseData } from '$lib/utils/csv';
 import _ from 'lodash';
 
 let countyData;
@@ -7,7 +7,7 @@ export async function getCountyData() {
 	if (countyData) return countyData;
 
 	const L = await import('leaflet');
-	const data = await getData();
+	const data = await parseData();
 	countyData = _(data)
 		.uniqBy('countyName')
 		.map((c) => {

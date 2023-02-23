@@ -1,4 +1,4 @@
-import { getData } from '$lib/utils/csv';
+import { parseData } from '$lib/utils/csv';
 import _ from 'lodash';
 
 // cache
@@ -9,21 +9,34 @@ let dataset = {
 	dataCountsByDate: null
 };
 
-async function getDataRankByLevel(level = null, minCount = 0) {
-	data = data ?? (await getData());
+function filterDateRange(data, start, last) {
+	const filtered = _.filter(data, (item) => {
+		const date = item.createdAt;
+		return (!start || date >= start) && (!last || date <= last);
+	});
+	return filtered;
+}
+
+async function computeDataRankByLevel(config = { level: null, minCount: 0 }) {
+	let { level, minCount, start, last } = config;
+	data = data ?? (await parseData());
+
+	level = level ?? null;
+	minCount = minCount ?? 0;
 
 	let data1;
+	data1 = filterDateRange(data, start, last);
 	// level = {countyName, townName, villName}
 	if (level === null) {
-		data1 = _(data).groupBy('countyName');
+		data1 = _(data1).groupBy('countyName');
 	} else if (level.countyName) {
 		// 鄉鎮市區比較
-		data1 = _(data)
+		data1 = _(data1)
 			.filter((row) => row.countyName === level.countyName.name)
 			.groupBy('townName');
 		if (level.townName) {
 			// 村里間比較
-			data1 = _(data)
+			data1 = _(data1)
 				.filter(
 					(row) => row.countyName === level.countyName.name && row.townName === level.townName.name
 				)
@@ -49,14 +62,17 @@ async function getDataRankByLevel(level = null, minCount = 0) {
 	return dataRankByLevel;
 }
 
-async function getDataCountsByCounty() {
-	data = data ?? (await getData());
-	if (dataset.dataCountsByCounty) {
-		return dataset.dataCountsByCounty;
-	}
+async function computeDataCountsByCounty(config) {
+	const { start, last } = config;
+	data = data ?? (await parseData());
+	// if (dataset.dataCountsByCounty) {
+	//   return dataset.dataCountsByCounty;
+	// }
 
 	// data counts by county
-	const countyCounts = _.countBy(data, 'countyName');
+
+	let data1 = filterDateRange(data, start, last);
+	const countyCounts = _.countBy(data1, 'countyName');
 	dataset.dataCountsByCounty = _(countyCounts)
 		.map((count, countyName) => {
 			return { countyName, count };
@@ -67,14 +83,16 @@ async function getDataCountsByCounty() {
 	return dataset.dataCountsByCounty;
 }
 
-async function getDataCountsByDate() {
-	data = data ?? (await getData());
-	if (dataset.dataCountsByDate) {
-		return dataset.dataCountsByDate;
-	}
+async function computeDataCountsByDate(config) {
+	const { start, last } = config;
+	data = data ?? (await parseData());
+	// if (dataset.dataCountsByDate) {
+	//   return dataset.dataCountsByDate;
+	// }
 
+	let data1 = filterDateRange(data, start, last);
 	// data counts by date
-	let temp = _.map(data, (item) => {
+	let temp = _.map(data1, (item) => {
 		return { ...item, createdAt: item.createdAt.toDateString() };
 	});
 	const createdAtCounts = _.countBy(temp, 'createdAt');
@@ -85,18 +103,13 @@ async function getDataCountsByDate() {
 	return dataset.dataCountsByDate;
 }
 
-export async function getChartDataByName(name, ...args) {
+export async function computeChartDataByName(name, config) {
 	switch (name) {
 		case '人行道評分依行政區':
-			if (args.length > 0) {
-				// level, minCount
-				return await getDataRankByLevel(...args);
-			} else {
-				return await getDataRankByLevel();
-			}
+			return await computeDataRankByLevel(config);
 		case '資料數依日期':
-			return await getDataCountsByDate();
+			return await computeDataCountsByDate(config);
 		case '資料數依縣市':
-			return await getDataCountsByCounty();
+			return await computeDataCountsByCounty(config);
 	}
 }
