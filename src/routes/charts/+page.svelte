@@ -43,6 +43,7 @@
 				</option>
 			{/each}
 		</select>
+    <!-- 當圖是「人行道評分依行政區」時 -->
 		{#if selected?.text === '人行道評分依行政區'}
 			<div class="rank-control">
 				<CountySelect on:select={handleSelect} />
@@ -58,6 +59,7 @@
 						class="range-slider"
 					/>
 				</div>
+        <div>⚠️地區間較僅供參考，空間分析在不同尺度（scale）的資料不一定能互相比較。</div>
 			</div>
 		{/if}
 	{/if}
