@@ -6,7 +6,7 @@ let data;
 export async function getData() {
 	return new Promise((resolve, reject) => {
 		if (data) {
-      resolve(data);
+			resolve(data);
 		} else {
 			Papa.parse('data/data.csv', {
 				download: true,

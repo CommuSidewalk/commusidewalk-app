@@ -15,7 +15,7 @@ import { LabelLayout, UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 
 import _ from 'lodash';
-import { getDataCountsByCounty, getDataCountsByDate, getDataRankByLevel } from './data';
+import { getChartDataByName } from './data';
 
 export async function initChart() {
 	echarts.use([
@@ -42,10 +42,6 @@ export async function initChart() {
 		myChart.resize();
 	});
 
-	const dataRankByLevel = await getDataRankByLevel();
-	const dataCountsByCounty = await getDataCountsByCounty();
-	const dataCountsByDate = await getDataCountsByDate();
-
 	const optCountsByCounty = {
 		toolbox: {
 			feature: {
@@ -65,7 +61,7 @@ export async function initChart() {
 		xAxis: {},
 		yAxis: { type: 'category' },
 		dataset: {
-			source: dataCountsByCounty
+			source: {}
 		},
 		series: [
 			{
@@ -88,7 +84,7 @@ export async function initChart() {
 		},
 		legend: { bottom: 0 },
 		tooltip: {},
-		dataset: { source: dataRankByLevel },
+		dataset: { source: {} },
 		title: {
 			left: 'center',
 			text: '人行道評分依行政區'
@@ -115,7 +111,7 @@ export async function initChart() {
 	};
 
 	const optCountsByDate = {
-		dataset: { source: dataCountsByDate },
+		dataset: { source: {} },
 		tooltip: {
 			trigger: 'axis',
 			position: function (pt) {
@@ -163,14 +159,25 @@ export async function initChart() {
 		]
 	};
 
+	const options = [
+		{ text: '人行道評分依行政區', echartsOption: optRankByLevel },
+		{ text: '資料數依縣市', echartsOption: optCountsByCounty },
+		{ text: '資料數依日期', echartsOption: optCountsByDate }
+	];
+
 	const chart = {
-		options: [
-			{ text: '人行道評分依行政區', echartsOption: optRankByLevel },
-			{ text: '資料數依縣市', echartsOption: optCountsByCounty },
-			{ text: '資料數依日期', echartsOption: optCountsByDate }
-		],
-		select: (option) => {
-			myChart.setOption(option.echartsOption, true);
+		options,
+		select: async (opt, ...args) => {
+			myChart.showLoading();
+			let data;
+			if (args.length > 0) {
+				data = await getChartDataByName(opt.text, ...args);
+			} else {
+				data = await getChartDataByName(opt.text);
+			}
+			opt.echartsOption.dataset.source = data;
+			myChart.setOption(opt.echartsOption, true);
+			myChart.hideLoading();
 		},
 		updateDataRankByLevel(level, minCount) {
 			getDataRankByLevel(level, minCount).then((source) => {
@@ -179,6 +186,8 @@ export async function initChart() {
 			});
 		}
 	};
+
+	myChart.showLoading();
 
 	return chart;
 }

@@ -7,13 +7,13 @@ export async function initMap() {
 	const L = await import('leaflet');
 	const map = L.map('map', { preferCanvas: true }).setView([25.0596, 121.4951], 13);
 
-  // base layer
+	// base layer
 	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 19,
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
-  // WMTS 村里界圖層
+	// WMTS 村里界圖層
 	const village = L.tileLayer(
 		'https://wmts.nlsc.gov.tw/wmts/Village/default/GoogleMapsCompatible/{z}/{y}/{x}',
 		{

@@ -9,7 +9,7 @@ let dataset = {
 	dataCountsByDate: null
 };
 
-export async function getDataRankByLevel(level = null, minCount = 0) {
+async function getDataRankByLevel(level = null, minCount = 0) {
 	data = data ?? (await getData());
 
 	let data1;
@@ -49,7 +49,7 @@ export async function getDataRankByLevel(level = null, minCount = 0) {
 	return dataRankByLevel;
 }
 
-export async function getDataCountsByCounty() {
+async function getDataCountsByCounty() {
 	data = data ?? (await getData());
 	if (dataset.dataCountsByCounty) {
 		return dataset.dataCountsByCounty;
@@ -67,7 +67,7 @@ export async function getDataCountsByCounty() {
 	return dataset.dataCountsByCounty;
 }
 
-export async function getDataCountsByDate() {
+async function getDataCountsByDate() {
 	data = data ?? (await getData());
 	if (dataset.dataCountsByDate) {
 		return dataset.dataCountsByDate;
@@ -83,4 +83,20 @@ export async function getDataCountsByDate() {
 	}).sort((a, b) => a.createdAt > b.createdAt);
 
 	return dataset.dataCountsByDate;
+}
+
+export async function getChartDataByName(name, ...args) {
+	switch (name) {
+		case '人行道評分依行政區':
+			if (args.length > 0) {
+				// level, minCount
+				return await getDataRankByLevel(...args);
+			} else {
+				return await getDataRankByLevel();
+			}
+		case '資料數依日期':
+			return await getDataCountsByDate();
+		case '資料數依縣市':
+			return await getDataCountsByCounty();
+	}
 }

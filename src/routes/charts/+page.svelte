@@ -3,28 +3,60 @@
 	import { initChart } from './chart';
 	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 	import CountySelect from '$lib/components/CountySelect.svelte';
+	import { getChartDataByName } from './data';
+	import * as Papa from 'papaparse';
 
 	let selected;
 	let chart;
 	let minCount = 0;
-  let level;
+	let level;
+	let downloadDisabled = true;
 
 	onMount(async () => {
 		chart = await initChart();
 		selected = chart.options[0];
+		downloadDisabled = false;
 	});
 
 	$: if (selected !== undefined) {
-		chart.select(selected);
+		chart?.select(selected);
 	}
 
 	function handleSelect(e) {
-    level = e.detail
-		chart?.updateDataRankByLevel(level);
+		level = e.detail;
+		chart?.select(selected, level);
 	}
 
 	function handleMinCount() {
-		chart?.updateDataRankByLevel(level, minCount);
+		chart?.select(selected, level, minCount);
+	}
+
+	async function handleDownload(fileType) {
+		let data;
+		try {
+			if (selected.text === '人行道評分依行政區') {
+				data = await getChartDataByName(selected.text, level, minCount);
+			} else {
+				data = await getChartDataByName(selected.text);
+			}
+			const link = document.createElement('a');
+
+			switch (fileType) {
+				case 'json':
+					data = JSON.stringify(data);
+					break;
+				case 'csv':
+					data = Papa.unparse(data);
+					break;
+			}
+			link.href = 'data:text/${fileType};charset=utf-8,' + encodeURIComponent(data);
+			link.download = selected.text + '.' + fileType;
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+		} catch (err) {
+			console.error(err);
+		}
 	}
 </script>
 
@@ -38,12 +70,16 @@
 	{#if chart?.options}
 		<select name="chart" bind:value={selected}>
 			{#each chart.options as opt}
-				<option value={opt}>
-					{opt.text}
-				</option>
+				{#if !opt.loading}
+					<option value={opt}>
+						{opt.text}
+					</option>
+				{/if}
 			{/each}
 		</select>
-    <!-- 當圖是「人行道評分依行政區」時 -->
+		<button disabled={downloadDisabled} on:click={() => handleDownload('json')}>下載JSON</button>
+		<button disabled={downloadDisabled} on:click={() => handleDownload('csv')}>下載CSV</button>
+		<!-- 當圖是「人行道評分依行政區」時 -->
 		{#if selected?.text === '人行道評分依行政區'}
 			<div class="rank-control">
 				<CountySelect on:select={handleSelect} />
@@ -59,7 +95,7 @@
 						class="range-slider"
 					/>
 				</div>
-        <div>⚠️地區間之比較僅供參考，空間分析在不同尺度（scale）的資料不一定能互相比較。</div>
+				<div>⚠️地區間之比較僅供參考，空間分析在不同尺度（scale）的資料不一定能互相比較。</div>
 			</div>
 		{/if}
 	{/if}
