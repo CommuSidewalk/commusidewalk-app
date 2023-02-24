@@ -14,16 +14,12 @@
 Once you've cloned a project and installed dependencies with `yarn`, start a development server:
 
 ```bash
-yarn # 安裝必要套件
-yarn dev # 開啟開發伺服器(按o可以打開瀏覽器)
+yarn        # 安裝必要套件
+yarn dev    # 開啟開發伺服器(按o可以打開瀏覽器)
 yarn format # format 所有檔案
-yarn build # 打包
+yarn build  # 打包
 ```
 
-## 更新資料步驟
+## 更新資料
 
-1. cd commusidewalk
-2. run commusidewalk/main.R
-3. cd commusidewalk-app
-4. raku copy.raku # copy last modified file (should be YYYYmmdd_vill.csv) to static/data/data.csv
-5. done :)
+1. run `raku update-data.raku`
