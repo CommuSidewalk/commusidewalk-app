@@ -10,6 +10,7 @@
 	let startVal = null;
 	let lastVal = null;
 
+  // from Date object to YYYY-MM-DD
 	function format(date) {
 		return date.toISOString().slice(0, 10);
 	}

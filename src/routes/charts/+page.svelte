@@ -48,7 +48,8 @@
 					data = Papa.unparse(data);
 					break;
 			}
-			link.href = 'data:text/${fileType};charset=utf-8,' + encodeURIComponent(data);
+      const universalBOM = "\uFEFF";
+			link.href = 'data:text/${fileType};charset=utf-8,' + encodeURIComponent(universalBOM + data);
 			link.download = selected.text + '.' + fileType;
 			document.body.appendChild(link);
 			link.click();

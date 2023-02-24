@@ -116,7 +116,7 @@ export async function initChart() {
 			trigger: 'axis',
 			position: function (pt) {
 				return [pt[0], '10%'];
-			}
+			},
 		},
 		title: {
 			left: 'center',
@@ -133,7 +133,7 @@ export async function initChart() {
 		},
 		xAxis: {
 			type: 'time',
-			boundaryGap: false
+			boundaryGap: false,
 		},
 		yAxis: {
 			type: 'value',
