@@ -19,14 +19,14 @@ jobs:
         with:
           timezoneLinux: "Asia/Taipei"
 
-      - name: Install Rakudo
+      - name: Install Rakudo and curl
         uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: rakudo
+          packages: rakudo curl
           version: 1.0
 
       - name: Fetch csv
-        run: raku update-data.raku
+        run: raku fetch-data.raku
 
       - name: Install Vercel CLI
         run: npm install --global vercel@canary

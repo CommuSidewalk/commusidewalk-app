@@ -4,7 +4,7 @@ mkdir('static/data');
 sub download-csv(Date $date) {
   my $csv-url = 'https://raw.githubusercontent.com/FOBshippingpoint/commusidewalk/master/output/' ~ $date.yyyy-mm-dd('') ~ '_village.csv';
   say 'Download from: ' ~ $csv-url;
-  run "powershell", "curl $csv-url -o static/data/data.csv";
+  run 'curl', $csv-url, '-o', 'static/data/data.csv';
 }
 
 my $date = Date.today;
