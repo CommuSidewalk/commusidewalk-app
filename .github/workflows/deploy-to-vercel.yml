@@ -3,10 +3,9 @@ run-name: ${{ github.actor }} is deploying website to Vercel.
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-# on:
-  # schedule:
-  #   - cron: '30 15 * * *' # 每天臺灣時間23:00執行(UTC+8)
-on: [push]
+on:
+  schedule:
+    - cron: '30 15 * * *' # 每天臺灣時間23:30執行(UTC+8)
 
 jobs:
   Deploy-Production:
