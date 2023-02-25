@@ -39,4 +39,8 @@ PUBLIC_UPDATE_DATE = 2023/02/25
 ### 自動
 
 1. 安裝 [Raku](https://raku.org/downloads) (aka Perl6)
-2. run `raku update-data.raku`
+2. run `raku fetch-data.raku`
+
+### Github Actions 自動部署
+
+`.github/workflows/deploy-to-vercel.yml`會於每日 23:30 (UTC+8) 自動從 [commusidewalk](https://github.com/FOBshippingpoint/commusidewalk) 抓取資料，並部署至 Vercel 平台。
