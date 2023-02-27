@@ -11,7 +11,7 @@ my $date = Date.today;
 
 try {
   download-csv-by-date $date;
-  die "404 not found" if slurp('static/data/data.csv') ~~ / 404:\sNot\sFound /;
+  die "404 not found" if slurp('static/data/data.csv') ~~ / 404\:\sNot\sFound /;
 
   CATCH {
     default {
