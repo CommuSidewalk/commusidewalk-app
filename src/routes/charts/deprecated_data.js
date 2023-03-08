@@ -1,4 +1,4 @@
-import { parseData } from '$lib/utils/csv';
+import { getData } from '$lib/utils/get-data';
 import _ from 'lodash';
 
 // cache
@@ -8,6 +8,16 @@ let dataset = {
 	dataCountsByCounty: null,
 	dataCountsByDate: null
 };
+
+async function initData() {
+	if (data) return;
+	const obj = await getData();
+	if (obj.data) {
+		data = obj.data;
+	} else {
+		console.error(obj.error);
+	}
+}
 
 function filterDateRange(data, start, last) {
 	const filtered = _.filter(data, (item) => {
@@ -19,26 +29,27 @@ function filterDateRange(data, start, last) {
 
 async function computeDataRankByLevel(config = { level: null, minCount: 0 }) {
 	let { level, minCount, start, last } = config;
-	data = data ?? (await parseData());
+	await initData();
 
 	level = level ?? null;
 	minCount = minCount ?? 0;
 
 	let data1;
 	data1 = filterDateRange(data, start, last);
-	// level = {countyName, townName, villName}
+  console.log(data1)
+	// level = {county, town, vill}
 	if (level === null) {
 		data1 = _(data1).groupBy('countyName');
-	} else if (level.countyName) {
+	} else if (level.county) {
 		// 鄉鎮市區比較
 		data1 = _(data1)
-			.filter((row) => row.countyName === level.countyName.name)
+			.filter((row) => row.county === level.county.name)
 			.groupBy('townName');
-		if (level.townName) {
+		if (level.town) {
 			// 村里間比較
 			data1 = _(data1)
 				.filter(
-					(row) => row.countyName === level.countyName.name && row.townName === level.townName.name
+					(row) => row.county === level.county.name && row.town === level.town.name
 				)
 				.groupBy('villName');
 		}
@@ -64,7 +75,7 @@ async function computeDataRankByLevel(config = { level: null, minCount: 0 }) {
 
 async function computeDataCountsByCounty(config) {
 	const { start, last } = config;
-	data = data ?? (await parseData());
+	await initData();
 	// if (dataset.dataCountsByCounty) {
 	//   return dataset.dataCountsByCounty;
 	// }
@@ -85,10 +96,7 @@ async function computeDataCountsByCounty(config) {
 
 async function computeDataCountsByDate(config) {
 	const { start, last } = config;
-	data = data ?? (await parseData());
-	// if (dataset.dataCountsByDate) {
-	//   return dataset.dataCountsByDate;
-	// }
+	await initData();
 
 	let data1 = filterDateRange(data, start, last);
 	// data counts by date
@@ -113,3 +121,5 @@ export async function computeChartDataByName(name, config) {
 			return await computeDataCountsByCounty(config);
 	}
 }
+
+initData();

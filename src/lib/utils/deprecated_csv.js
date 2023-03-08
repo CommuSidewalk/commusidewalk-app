@@ -1,20 +1,19 @@
 import * as Papa from 'papaparse';
 
-let data;
+let cachedData;
 
 // read csv file and convert to js object
 export async function parseData() {
 	return new Promise((resolve, reject) => {
-		if (data) {
-			resolve(data);
+		if (cachedData) {
+			resolve(cachedData);
 		} else {
 			Papa.parse('data/data.csv', {
 				download: true,
 				skipEmptyLines: true,
 				header: true,
 				complete: (results) => {
-					data = results.data;
-					data = data.map((item) => {
+					cachedData = results.data.map((item) => {
 						return {
 							...item,
 							rankA1: parseFloat(item.rankA1),
@@ -25,7 +24,10 @@ export async function parseData() {
 							updatedAt: new Date(item.updatedAt)
 						};
 					});
-					resolve(data);
+					resolve(cachedData);
+				},
+				error: (error) => {
+					reject(error);
 				}
 			});
 		}

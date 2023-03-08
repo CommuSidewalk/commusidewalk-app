@@ -1,59 +1,52 @@
 <script>
-	import { onMount, createEventDispatcher } from 'svelte';
-	import { getCountyData } from '$lib/utils/county-data';
+	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
 
-	let countyData;
+	export let countyData;
 
-	onMount(async () => {
-		countyData = await getCountyData();
-	});
-
-	let countyName = countyData ? countyData[0] : null;
-	let townName = countyName ? countyName.towns[0] : null;
-	let villName = townName ? townName.villages[0] : null;
+	let county = null
+	let town = null
+	let vill = null
 
 	function onCountySelection() {
-		townName = null;
-		villName = null;
+		town = null;
+		vill = null;
 		myDispatch();
 	}
 
 	function onTownSelection() {
-		villName = null;
+		vill = null;
 		myDispatch();
 	}
 
 	function myDispatch() {
 		dispatch('select', {
-			countyName,
-			townName,
-			villName
+			county,
+			town,
+			vill
 		});
 	}
 </script>
 
-{#if countyData}
 	<div class="select-container">
-		<label for="countyName"> 縣市 </label>
-		<select name="countyName" bind:value={countyName} on:change={onCountySelection}>
-			{#each countyData as county}
-				<option value={county}>{county.name}</option>
+		<label for="county"> 縣市 </label>
+		<select name="county" bind:value={county} on:change={onCountySelection}>
+			{#each countyData as c}
+				<option value={c}>{c.name}</option>
 			{/each}
 		</select>
 	</div>
 	<div class="select-container">
-		<label for="townName"> 鄉鎮市區 </label>
-		<select name="townName" bind:value={townName} on:change={onTownSelection}>
-			{#if countyName}
-				{#each countyName.towns as town}
-					<option value={town}>{town.name}</option>
+		<label for="town"> 鄉鎮市區 </label>
+		<select name="town" bind:value={town} on:change={onTownSelection}>
+			{#if county}
+				{#each county.towns as t}
+					<option value={t}>{t.name}</option>
 				{/each}
 			{/if}
 		</select>
 	</div>
-{/if}
 
 <style>
 	label,

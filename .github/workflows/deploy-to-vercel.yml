@@ -16,7 +16,7 @@ jobs:
       - name: Set timezone
         uses: szenius/set-timezone@v1.0
         with:
-          timezoneLinux: "Asia/Taipei"
+          timezoneLinux: 'Asia/Taipei'
 
       - name: Install Rakudo and curl
         uses: awalsh128/cache-apt-pkgs-action@latest
