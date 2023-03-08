@@ -3,7 +3,7 @@ import { browser } from "$app/environment";
 let data;
 let countyData;
 
-export async function getData(fetch) {
+export async function fetchData(fetch) {
   if (data) {
     return { data };
   }
@@ -32,7 +32,7 @@ export async function getData(fetch) {
   }
 }
 
-export async function getCountyData(fetch) {
+export async function fetchCountyData(fetch) {
   if (countyData) {
     return { data: countyData };
   }

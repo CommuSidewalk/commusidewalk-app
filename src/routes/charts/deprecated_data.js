@@ -1,4 +1,4 @@
-import { getData } from '$lib/utils/get-data';
+import { fetchData } from '$lib/utils/fetch-data';
 import _ from 'lodash';
 
 // cache
@@ -11,7 +11,7 @@ let dataset = {
 
 async function initData() {
 	if (data) return;
-	const obj = await getData();
+	const obj = await fetchData();
 	if (obj.data) {
 		data = obj.data;
 	} else {

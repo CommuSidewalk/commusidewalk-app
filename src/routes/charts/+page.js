@@ -2,11 +2,11 @@
 // it so that it gets served as a static asset in production
 // export const prerender = true;
 
-import { getCountyData } from "$lib/utils/get-data";
+import { fetchCountyData } from "$lib/utils/fetch-data";
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ fetch }) {
   return {
-    countyData: (await getCountyData(fetch)).data,
+    countyData: (await fetchCountyData(fetch)).data,
   };
 }
