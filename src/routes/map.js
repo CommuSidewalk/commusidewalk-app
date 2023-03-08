@@ -1,6 +1,5 @@
 import { PUBLIC_UPDATE_DATE } from "$env/static/public";
-import { getCountyData } from "$lib/utils/county-data";
-import { parseData } from "$lib/utils/csv";
+// import { computeCountyData } from "$lib/utils/county-data";
 import Popup from "$lib/components/Popup.svelte";
 
 function onGetUserLatLng(cb) {
@@ -8,27 +7,30 @@ function onGetUserLatLng(cb) {
     console.log("Geolocation is not supported by this browser.");
     return;
   }
-  navigator.geolocation.getCurrentPosition((position) => {
-    const { latitude, longitude } = position.coords;
-    cb([latitude, longitude]);
-  }, (error) => {
-    switch (error.code) {
-      case error.PERMISSION_DENIED:
-        console.log("User denied the request for Geolocation.");
-        break;
-      case error.POSITION_UNAVAILABLE:
-        console.log("Location information is unavailable.");
-        break;
-      case error.TIMEOUT:
-        console.log("The request to get user location timed out.");
-        break;
-    }
-  });
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const { latitude, longitude } = position.coords;
+      cb([latitude, longitude]);
+    },
+    (error) => {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          console.log("User denied the request for Geolocation.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          console.log("Location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          console.log("The request to get user location timed out.");
+          break;
+      }
+    },
+  );
 }
 
-export async function initMap() {
+export async function initMap(el, data) {
   const L = await import("leaflet");
-  const map = L.map("map", { preferCanvas: true }).setView(
+  const map = L.map(el, { preferCanvas: true }).setView(
     [25.0453, 121.5403],
     13,
   );
@@ -93,9 +95,9 @@ export async function initMap() {
 
   legend.addTo(map);
 
-  const data = await parseData();
-  const countyData = await getCountyData();
+  // const countyData = await computeCountyData();
   const allMarker = L.layerGroup();
+
   data.forEach(addRow);
   async function addRow(row) {
     const marker = L.circleMarker([row.lat, row.lng], {
@@ -104,21 +106,21 @@ export async function initMap() {
     }).addTo(allMarker);
 
     // add all markers to corresponding layer (county, town, village)
-    countyData.map((c) => {
-      if (row.countyName == c.name) {
-        c.layer.addLayer(marker);
-      }
-      c.towns.map((t) => {
-        if (row.townName == t.name) {
-          t.layer.addLayer(marker);
-        }
-        t.villages.map((v) => {
-          if (row.villName == v.name) {
-            v.layer.addLayer(marker);
-          }
-        });
-      });
-    });
+    // countyData.map((c) => {
+    //   if (row.countyName == c.name) {
+    //     c.layer.addLayer(marker);
+    //   }
+    //   c.towns.map((t) => {
+    //     if (row.townName == t.name) {
+    //       t.layer.addLayer(marker);
+    //     }
+    //     t.villages.map((v) => {
+    //       if (row.villName == v.name) {
+    //         v.layer.addLayer(marker);
+    //       }
+    //     });
+    //   });
+    // });
     marker.bindPopup(() => {
       const container = L.DomUtil.create("div");
       new Popup({

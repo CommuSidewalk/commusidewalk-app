@@ -4,9 +4,13 @@
 	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 	import Control from '$lib/components/Control.svelte';
 
+  /** @type {import('./$types').PageData} */
+  export let data;
+  let mapEl;
 	let mapControl;
+
 	onMount(async () => {
-		mapControl = await initMap();
+		mapControl = await initMap(mapEl, data.data);
 	});
 </script>
 
@@ -15,7 +19,7 @@
 	<meta name="description" content="臺灣人行道評分互動式看板" />
 </svelte:head>
 
-<div id="map" class="map-container" />
+<div id="map" class="map-container" bind:this={mapEl} />
 <div class="control-panel">
 	{#if mapControl}
 		<Control {...mapControl} />

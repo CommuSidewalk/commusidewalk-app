@@ -2,19 +2,21 @@
 	import { onMount } from 'svelte';
 	import { initChart } from './chart';
 	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
-	import CountySelect from '$lib/components/CountySelect.svelte';
-	import { computeChartDataByName } from './data';
-	import * as Papa from 'papaparse';
+	import Papa from 'papaparse';
 	import DateRange from '$lib/components/DateRange.svelte';
+	import CountySelect from '$lib/components/CountySelect.svelte';
 
 	let selected;
 	let chart;
 	let minCount = 0;
 	let downloadDisabled = true;
 	let config = {};
+	/** @type {import('./$types').PageData} */
+	export let data;
+  let chartEl;
 
 	onMount(async () => {
-		chart = await initChart();
+		chart = await initChart(chartEl);
 		selected = chart.options[0];
 		downloadDisabled = false;
 	});
@@ -37,7 +39,10 @@
 	async function handleDownload(fileType) {
 		let data;
 		try {
-			data = await computeChartDataByName(selected.text, config);
+      const params = new URLSearchParams();
+      params.set('name', selected.text)
+      params.set('config', JSON.stringify(config))
+			data = await fetch('/api/chart-data?' + params.toString());
 			const link = document.createElement('a');
 
 			switch (fileType) {
@@ -48,7 +53,7 @@
 					data = Papa.unparse(data);
 					break;
 			}
-      const universalBOM = "\uFEFF";
+			const universalBOM = '\uFEFF';
 			link.href = 'data:text/${fileType};charset=utf-8,' + encodeURIComponent(universalBOM + data);
 			link.download = selected.text + '.' + fileType;
 			document.body.appendChild(link);
@@ -95,7 +100,7 @@
 		<!-- 當圖是「人行道評分依行政區」時 -->
 		{#if selected?.text === '人行道評分依行政區'}
 			<div class="rank-control">
-				<CountySelect on:select={handleSelect} />
+				<CountySelect countyData={data.countyData} on:select={handleSelect} />
 				<div class="range-container">
 					<div><label for="minCount">最少資料數</label><span>{minCount}</span></div>
 					<input
@@ -113,7 +118,7 @@
 		{/if}
 	{/if}
 	<div>資料更新時間：{PUBLIC_UPDATE_DATE}</div>
-	<div id="main" />
+	<div id="main" bind:this={chartEl} />
 </section>
 
 <style>
