@@ -36,7 +36,7 @@ async function computeDataRankByLevel(config = { level: null, minCount: 0 }) {
 
 	let data1;
 	data1 = filterDateRange(data, start, last);
-  console.log(data1)
+	console.log(data1);
 	// level = {county, town, vill}
 	if (level === null) {
 		data1 = _(data1).groupBy('countyName');
@@ -48,9 +48,7 @@ async function computeDataRankByLevel(config = { level: null, minCount: 0 }) {
 		if (level.town) {
 			// 村里間比較
 			data1 = _(data1)
-				.filter(
-					(row) => row.county === level.county.name && row.town === level.town.name
-				)
+				.filter((row) => row.county === level.county.name && row.town === level.town.name)
 				.groupBy('villName');
 		}
 	}

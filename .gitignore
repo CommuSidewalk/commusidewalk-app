@@ -13,3 +13,4 @@ vite.config.ts.timestamp-*
 
 .vercel
 /static/data
+.turbo

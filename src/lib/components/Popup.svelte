@@ -1,34 +1,34 @@
 <script>
-	export let row;
+	export let point;
 
-	const googleMapLink = `https://maps.google.com/?q=${row.lat},${row.lng}`;
+	const googleMapLink = `https://maps.google.com/?q=${point.lat},${point.lng}`;
 </script>
 
 <section>
-	<a href={row.imgUrl} rel="noreferrer" target="_blank" title="在新分頁中開啟圖片">
-		<img class="photo" src={row.imgUrl} alt="人行道照片" />
+	<a href={point.imgUrl} rel="noreferrer" target="_blank" title="在新分頁中開啟圖片">
+		<img class="photo" src={point.imgUrl} alt="人行道照片" />
 	</a>
 	<table>
 		<tr>
 			<th>分數</th>
-			<td>a1: {row.rankA1}</td>
+			<td>a1: {point.rankA1}</td>
 		</tr>
 		<tr>
 			<th />
-			<td>b1: {row.rankB1}</td>
+			<td>b1: {point.rankB1}</td>
 		</tr>
 		<tr>
 			<th />
-			<td>c1: {row.rankC1}</td>
+			<td>c1: {point.rankC1}</td>
 		</tr>
 		<tr>
 			<th>村里</th>
-			<td>{row.countyName} {row.townName} {row.villName}</td>
+			<td>{point.countyName} {point.townName} {point.villName}</td>
 		</tr>
 		<tr>
 			<th>經緯度</th>
 			<td
-				>{parseFloat(row.lng).toFixed(4)}, {parseFloat(row.lat).toFixed(4)}<a
+				>{parseFloat(point.lng).toFixed(4)}, {parseFloat(point.lat).toFixed(4)}<a
 					href={googleMapLink}
 					target="_blank"
 					rel="noreferrer"
@@ -43,7 +43,7 @@
 		</tr>
 		<tr>
 			<th>上傳時間</th>
-			<td>{row.createdAt.toLocaleString()}</td>
+			<td>{point.createdAt.toLocaleString()}</td>
 		</tr>
 	</table>
 </section>

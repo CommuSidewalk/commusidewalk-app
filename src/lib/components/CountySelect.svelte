@@ -5,9 +5,9 @@
 
 	export let countyData;
 
-	let county = null
-	let town = null
-	let vill = null
+	let county = null;
+	let town = null;
+	let vill = null;
 
 	function onCountySelection() {
 		town = null;
@@ -29,24 +29,24 @@
 	}
 </script>
 
-	<div class="select-container">
-		<label for="county"> 縣市 </label>
-		<select name="county" bind:value={county} on:change={onCountySelection}>
-			{#each countyData as c}
-				<option value={c}>{c.name}</option>
+<div class="select-container">
+	<label for="county"> 縣市 </label>
+	<select name="county" bind:value={county} on:change={onCountySelection}>
+		{#each countyData as c}
+			<option value={c}>{c.name}</option>
+		{/each}
+	</select>
+</div>
+<div class="select-container">
+	<label for="town"> 鄉鎮市區 </label>
+	<select name="town" bind:value={town} on:change={onTownSelection}>
+		{#if county}
+			{#each county.towns as t}
+				<option value={t}>{t.name}</option>
 			{/each}
-		</select>
-	</div>
-	<div class="select-container">
-		<label for="town"> 鄉鎮市區 </label>
-		<select name="town" bind:value={town} on:change={onTownSelection}>
-			{#if county}
-				{#each county.towns as t}
-					<option value={t}>{t.name}</option>
-				{/each}
-			{/if}
-		</select>
-	</div>
+		{/if}
+	</select>
+</div>
 
 <style>
 	label,

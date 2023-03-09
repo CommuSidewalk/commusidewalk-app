@@ -4,9 +4,9 @@
 	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 	import Control from '$lib/components/Control.svelte';
 
-  /** @type {import('./$types').PageData} */
-  export let data;
-  let mapEl;
+	/** @type {import('./$types').PageData} */
+	export let data;
+	let mapEl;
 	let mapControl;
 
 	onMount(async () => {

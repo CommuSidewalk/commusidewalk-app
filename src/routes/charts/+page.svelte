@@ -13,7 +13,7 @@
 	let config = {};
 	/** @type {import('./$types').PageData} */
 	export let data;
-  let chartEl;
+	let chartEl;
 
 	onMount(async () => {
 		chart = await initChart(chartEl);
@@ -39,9 +39,9 @@
 	async function handleDownload(fileType) {
 		let data;
 		try {
-      const params = new URLSearchParams();
-      params.set('name', selected.text)
-      params.set('config', JSON.stringify(config))
+			const params = new URLSearchParams();
+			params.set('name', selected.text);
+			params.set('config', JSON.stringify(config));
 			data = await fetch('/api/chart-data?' + params.toString());
 			const link = document.createElement('a');
 

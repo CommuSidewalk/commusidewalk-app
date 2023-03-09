@@ -7,17 +7,12 @@
 	export let start = null;
 	export let last = null;
 
-	let startVal = null;
-	let lastVal = null;
-
-	// from Date object to YYYY-MM-DD
-	function format(date) {
-		return date.toISOString().slice(0, 10);
-	}
+	let startVal = '';
+	let lastVal = '';
 
 	$: {
-		start = startVal ? new Date(startVal) : start;
-		last = lastVal ? new Date(lastVal) : last;
+		start = startVal === '' ? null : new Date(startVal);
+		last = lastVal === '' ? null : new Date(lastVal);
 		dispatch('change', { start, last });
 	}
 </script>
