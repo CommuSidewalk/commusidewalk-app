@@ -33,10 +33,12 @@
 	"type": "module",
 	"dependencies": {
 		"@sveltejs/adapter-vercel": "^2.0.0",
+		"@vercel/analytics": "^0.1.11",
 		"echarts": "^5.4.1",
 		"leaflet": "^1.9.3",
 		"lodash": "^4.17.21",
 		"node-fetch": "^3.3.0",
-		"papaparse": "^5.3.2"
+		"papaparse": "^5.3.2",
+		"tabulator-tables": "^5.4.4"
 	}
 }

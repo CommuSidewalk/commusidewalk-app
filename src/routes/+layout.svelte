@@ -3,6 +3,10 @@
 	import '$lib/css/leaflet.css';
 	import Tooltip from '$lib/components/Tooltip.svelte';
 	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
+
+	inject({ mode: dev ? 'development' : 'production' });
 </script>
 
 <div class="app">
