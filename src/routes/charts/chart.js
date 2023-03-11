@@ -167,7 +167,7 @@ export async function initChart(el) {
 		options,
 		select: async (opt, config) => {
 			myChart.showLoading();
-			const { data } = await fetchChartData(fetch, opt.text, config);
+			const data = await fetchChartData(fetch, opt.text, config);
 			opt.echartsOption.dataset.source = data;
 			myChart.setOption(opt.echartsOption, true);
 			myChart.hideLoading();

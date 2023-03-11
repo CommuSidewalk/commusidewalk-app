@@ -7,6 +7,6 @@ import { fetchCountyData } from '$lib/utils/fetch-data';
 /** @type {import('./$types').PageLoad} */
 export async function load({ fetch }) {
 	return {
-		countyData: (await fetchCountyData(fetch)).data
+		countyData: await fetchCountyData(fetch)
 	};
 }

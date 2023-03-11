@@ -13,6 +13,7 @@ async function initData() {
 	data = await parseData();
 }
 
+// should replace by server/utils/filter...
 function filterDateRange(data, start = null, last = null) {
 	const filtered = _.filter(data, (item) => {
 		const date = item.createdAt;
