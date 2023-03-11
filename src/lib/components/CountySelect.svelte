@@ -4,7 +4,7 @@
 	const dispatch = createEventDispatcher();
 
 	export let countyData;
-  export let maxLevel = 3;
+	export let maxLevel = 3;
 
 	let county = null;
 	let town = null;
@@ -31,7 +31,7 @@
 			town,
 			vill
 		});
-    myDispatchV2()
+		myDispatchV2();
 	}
 
 	function myDispatchV2() {
@@ -43,41 +43,40 @@
 	}
 </script>
 
-{#if maxLevel  >= 1}
-<div class="select-container">
-	<label for="county"> 縣市 </label>
-	<select name="county" bind:value={county} on:change={onCountySelection}>
-		{#each countyData as c}
-			<option value={c}>{c.name}</option>
-		{/each}
-	</select>
-</div>
+{#if maxLevel >= 1}
+	<div class="select-container">
+		<label for="county"> 縣市 </label>
+		<select name="county" bind:value={county} on:change={onCountySelection}>
+			{#each countyData as c}
+				<option value={c}>{c.name}</option>
+			{/each}
+		</select>
+	</div>
 {/if}
 {#if maxLevel >= 2}
-<div class="select-container">
-	<label for="town"> 鄉鎮市區 </label>
-	<select name="town" bind:value={town} on:change={onTownSelection}>
-		{#if county}
-			{#each county.towns as t}
-				<option value={t}>{t.name}</option>
-			{/each}
-		{/if}
-	</select>
-</div>
+	<div class="select-container">
+		<label for="town"> 鄉鎮市區 </label>
+		<select name="town" bind:value={town} on:change={onTownSelection}>
+			{#if county}
+				{#each county.towns as t}
+					<option value={t}>{t.name}</option>
+				{/each}
+			{/if}
+		</select>
+	</div>
 {/if}
 {#if maxLevel >= 3}
-<div class="select-container">
-	<label for="vill"> 村里 </label>
-	<select name="vill" bind:value={vill} on:change={onVillSelection}>
-		{#if town}
-			{#each town.villages as v}
-				<option value={v}>{v.name}</option>
-			{/each}
-		{/if}
-	</select>
-</div>
+	<div class="select-container">
+		<label for="vill"> 村里 </label>
+		<select name="vill" bind:value={vill} on:change={onVillSelection}>
+			{#if town}
+				{#each town.villages as v}
+					<option value={v}>{v.name}</option>
+				{/each}
+			{/if}
+		</select>
+	</div>
 {/if}
-
 
 <style>
 	label,

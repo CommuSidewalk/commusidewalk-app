@@ -26,9 +26,9 @@
 		paginationCounter: 'rows',
 		layout: 'fitColumns'
 	};
-  let intervalDays = 7;
-  let tableData= data.data;
-  let filterConfig  = {}
+	let intervalDays = 7;
+	let tableData = data.data;
+	let filterConfig = {};
 
 	function dateFormatter(cell, formatterParams, onRendered) {
 		const date = new Date(cell.getValue());
@@ -36,24 +36,23 @@
 	}
 
 	function handleDateChange(e) {
-    filterConfig = {...filterConfig, startDate: e.detail.start, endDate: e.detail.last}
-    updateTableData()
+		filterConfig = { ...filterConfig, startDate: e.detail.start, endDate: e.detail.last };
+		updateTableData();
 	}
 
-  function handleInput(e) {
-    updateTableData()
-  }
+	function handleInput(e) {
+		updateTableData();
+	}
 
-  function handleCountySelect(e) {
-      filterConfig = {...filterConfig, constraintAD: e.detail}
-      updateTableData()
-    }
+	function handleCountySelect(e) {
+		filterConfig = { ...filterConfig, constraintAD: e.detail };
+		updateTableData();
+	}
 
-  async function updateTableData() {
-    console.log(filterConfig)
+	async function updateTableData() {
+		console.log(filterConfig);
 		tableData = await fetchTableData(fetch, intervalDays, filterConfig);
-  }
-
+	}
 </script>
 
 <svelte:head>
@@ -63,9 +62,9 @@
 
 <div class="container">
 	<DateRange on:change={handleDateChange} />
-  <label for="intervalDays">區間日數</label>
-  <input id="intervalDays" bind:value={intervalDays} on:input={handleInput} type="number" min="1"/>
-  <CountySelect on:selectV2={handleCountySelect} countyData={data.countyData} maxLevel={3}/>
+	<label for="intervalDays">區間日數</label>
+	<input id="intervalDays" bind:value={intervalDays} on:input={handleInput} type="number" min="1" />
+	<CountySelect on:selectV2={handleCountySelect} countyData={data.countyData} maxLevel={3} />
 	<Tabulator data={tableData} {config} />
 </div>
 
