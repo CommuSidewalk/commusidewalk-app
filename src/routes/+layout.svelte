@@ -11,7 +11,8 @@
 		<nav>
 			<ul>
 				<li><a href="/">地圖</a></li>
-				<li><a href="/charts">圖表</a></li>
+				<li><a href="/charts">圖</a></li>
+				<li><a href="/tables">表</a></li>
 				<li><a href="/about">關於本站</a></li>
 			</ul>
 		</nav>

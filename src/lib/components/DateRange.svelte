@@ -5,6 +5,7 @@
 
 	// inclusive boundaries
 	export let start = null;
+  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! should rename to "end"
 	export let last = null;
 
 	let startVal = '';
