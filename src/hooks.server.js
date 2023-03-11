@@ -1,6 +1,7 @@
 /** @type {import('@sveltejs/kit').HandleClientError} */
-// export function handleError({ error, event }) {
-// 	return {
-// 		message: 'Whoops!'
-// 	};
-// }
+// this will surpress error, comment it when you need to see error message.
+export function handleError({ error, event }) {
+	return {
+		message: '錯誤'
+	};
+}
