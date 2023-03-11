@@ -76,7 +76,7 @@
 </script>
 
 <svelte:head>
-	<title>圖表 - 平安走路許願帳戶</title>
+	<title>圖 - 平安走路許願帳戶</title>
 	<meta name="description" content="統計圖表" />
 </svelte:head>
 
@@ -100,7 +100,7 @@
 		<!-- 當圖是「人行道評分依行政區」時 -->
 		{#if selected?.text === '人行道評分依行政區'}
 			<div class="rank-control">
-				<CountySelect countyData={data.countyData} on:select={handleSelect} />
+				<CountySelect countyData={data.countyData} on:select={handleSelect} maxLevel={2} />
 				<div class="range-container">
 					<div><label for="minCount">最少資料數</label><span>{minCount}</span></div>
 					<input

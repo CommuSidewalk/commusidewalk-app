@@ -61,7 +61,7 @@
 				群眾標註
 			</div>
 		</a>
-		<a href="https://github.com/fOBshippingpoint/commusidewalk-app">
+		<a href="https://github.com/CommuSidewalk/commusidewalk-app">
 			<div>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@
 				開源程式碼 - 本站
 			</div>
 		</a>
-		<a href="https://github.com/fOBshippingpoint/commusidewalk">
+		<a href="https://github.com/CommuSidewalk/commusidewalk-data">
 			<div>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
