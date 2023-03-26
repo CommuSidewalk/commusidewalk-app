@@ -15,7 +15,7 @@ export async function GET(e) {
 		let filterConfig = e.url.searchParams.get('filterConfig');
 		filterConfig = JSON.parse(filterConfig);
 		const data = await parseData();
-		let filtered = filterData(data, filterConfig);
+		const filtered = filterData(data, filterConfig);
 		const tableData = await computeTableData(filtered, intervalDays);
 		return json({ data: tableData });
 	} catch (err) {

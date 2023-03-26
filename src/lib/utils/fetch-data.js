@@ -45,8 +45,10 @@ export async function fetchChartData(fetch, name, config) {
 	const params = new URLSearchParams();
 	params.set('name', name);
 	params.set('config', JSON.stringify(config));
+
 	const response = await fetch('/api/chart-data?' + params.toString());
 	const json = await response.json();
+
 	if (response.status === 200) {
 		return json.data;
 	} else {
@@ -61,8 +63,10 @@ export async function fetchTableData(fetch, intervalDays, filterConfig = {}) {
 	filterConfig.startDate = filterConfig?.startDate?.toISOString().slice(0, 10);
 	filterConfig.endDate = filterConfig?.endDate?.toISOString().slice(0, 10);
 	params.set('filterConfig', JSON.stringify(filterConfig));
+
 	const response = await fetch('/api/table-data?' + params.toString());
 	const json = await response.json();
+
 	if (response.status === 200) {
 		return json.data;
 	} else {
