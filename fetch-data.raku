@@ -2,7 +2,7 @@ mkdir('static/data');
 
 # download csv from commusidewalk repo
 sub download-csv-by-date(Date $date) {
-  my $csv-url = 'https://raw.githubusercontent.com/FOBshippingpoint/commusidewalk/master/output/' ~ $date.yyyy-mm-dd('') ~ '_village.csv';
+  my $csv-url = 'https://raw.githubusercontent.com/FOBshippingpoint/commusidewalk/master/output/village.csv';
   say 'Download from: ' ~ $csv-url;
   run 'curl', $csv-url, '-o', 'static/data/data.csv';
 }
