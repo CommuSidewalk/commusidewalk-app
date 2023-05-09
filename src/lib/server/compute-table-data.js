@@ -7,7 +7,7 @@ export async function computeTableData(data, intervalDays) {
 	const groups = groupDataByDateRange(data, ranges);
 	groups.forEach((group) => {
 		group.meanA1 = calMean(group.data, 'rankA1');
-    group.meanA1Value = group.meanA1.toFixed(2); // copy meanA1 for displaying value instead of progress bar
+		group.meanA1Value = group.meanA1.toFixed(2); // copy meanA1 for displaying value instead of progress bar
 		delete group.data;
 	});
 	return groups;

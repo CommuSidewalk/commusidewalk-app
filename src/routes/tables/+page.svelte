@@ -18,7 +18,7 @@
 					color: ['red', 'orange', 'green']
 				}
 			},
-      meanA1Value: {title: "a1 平均分數 (滿分10分)"},
+			meanA1Value: { title: 'a1 平均分數 (滿分10分)' },
 			start: { title: '開始日期', formatter: dateFormatter },
 			end: { title: '結束日期', formatter: dateFormatter }
 		},
@@ -72,5 +72,6 @@
 <style>
 	.container {
 		width: 100vw;
+		margin: 2vh 3vw;
 	}
 </style>

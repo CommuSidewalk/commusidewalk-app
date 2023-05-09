@@ -95,6 +95,9 @@
 				開源程式碼 - R 資料處理
 			</div>
 		</a>
+		<a href="https://docs.google.com/document/d/1ziEal-ct8kgI2N_db41SLOtgksk2dz_AiWg_v5iuxco">
+			<div>API 文件</div>
+		</a>
 	</div>
 </div>
 

@@ -1,7 +1,7 @@
 <script>
 	import '$lib/css/tabulator.css';
 	import { onMount } from 'svelte';
-  // unknown build error on vercel, so change to this format.
+	// unknown build error on vercel, so change to this format.
 	import { TabulatorFull as Tabulator } from '$lib/js/tabulator_esm.js';
 
 	export let data;
