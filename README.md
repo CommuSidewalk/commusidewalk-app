@@ -6,6 +6,7 @@
 
 - [主文件](https://docs.google.com/document/d/1b_00BjDMkuyZISHzfEKU9DDw32BqmQ95k-O-bshxBQ0/edit)
 - [本程式文件](https://docs.google.com/document/d/1rU3uT3WfwCt3sVCViWHzoIisY5P64AMGAUk9i2fiSEM/edit#)
+- [API 文件](https://docs.google.com/document/d/1ziEal-ct8kgI2N_db41SLOtgksk2dz_AiWg_v5iuxco/edit#)
 
 ## Developing
 
