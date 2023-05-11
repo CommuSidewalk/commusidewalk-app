@@ -44,4 +44,4 @@ PUBLIC_UPDATE_DATE = 2023/02/25
 
 ### Github Actions 自動部署
 
-`.github/workflows/deploy-to-vercel.yml`會於每日 23:30 (UTC+8) 自動從 [commusidewalk](https://github.com/FOBshippingpoint/commusidewalk) 抓取資料，並部署至 Vercel 平台。
+`.github/workflows/deploy-to-vercel.yml`會於每日 23:30 (UTC+8) 自動從 [commusidewalk](https://github.com/CommuSidewalk/commusidewalk-data) 抓取資料，並部署至 Vercel 平台。
