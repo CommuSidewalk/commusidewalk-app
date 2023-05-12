@@ -9,17 +9,16 @@ body {
 header {
 	background-color: #449596;
 	color: #fff;
-	padding: 15px;
+	padding: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
 header span {
-	margin: 0;
-	font-size: 24px;
+	margin: 0 0.5em;
+	font-size: 1.2em;
 	letter-spacing: 2px;
-	margin-right: auto;
 }
 
 header span a {
@@ -41,41 +40,19 @@ header nav ul {
 }
 
 header nav li {
-	margin-right: 10px;
+	margin-right: 1.5em;
 }
 
 header nav a {
 	color: #fff;
 	text-decoration: none;
-	padding: 10px 20px;
-	border-radius: 20px;
-	transition: all 0.2s ease-in-out;
-}
-
-header nav a:hover {
-	background-color: #3d7c7d;
-	color: #ccc;
-	cursor: pointer;
 }
 
 main {
 	display: flex;
+	height: 100%;
 }
 
-.legend {
-	line-height: 18px;
-	color: #555;
-	padding: 6px 8px;
-	background: white;
-	background: rgba(255, 255, 255, 0.8);
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-	border-radius: 5px;
-}
-
-.legend i {
-	width: 18px;
-	height: 18px;
-	float: left;
-	margin-right: 8px;
-	opacity: 0.7;
+.content {
+	margin: 3vh 4vw;
 }

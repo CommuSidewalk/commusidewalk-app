@@ -80,7 +80,7 @@
 	<meta name="description" content="統計圖表" />
 </svelte:head>
 
-<section>
+<div class="content">
 	<div><label for="chart">圖表</label></div>
 	{#if chart?.options}
 		<select name="chart" bind:value={selected}>
@@ -119,13 +119,9 @@
 	{/if}
 	<div>資料更新時間：{PUBLIC_UPDATE_DATE}</div>
 	<div id="main" bind:this={chartEl} />
-</section>
+</div>
 
 <style>
-	section {
-		margin: 3vh 2vw;
-	}
-
 	#main {
 		height: 80vh;
 		width: 90vw;

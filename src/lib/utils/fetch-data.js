@@ -73,3 +73,29 @@ export async function fetchTableData(fetch, intervalDays, filterConfig = {}) {
 		throw Error(json.error);
 	}
 }
+
+export async function fetchDateRangeData(fetch, start, end) {
+	const params = new URLSearchParams();
+	params.set('start', start);
+	params.set('end', end);
+
+	const response = await fetch('/api/filter-date-range?' + params.toString());
+	const json = await response.json();
+
+	if (response.status === 200) {
+		data = json.data.map((item) => {
+			return {
+				...item,
+				rankA1: parseFloat(item.rankA1),
+				rankB1: parseFloat(item.rankB1),
+				rankC1: parseFloat(item.rankC1),
+				dataTime: new Date(item.dataTime),
+				createdAt: new Date(item.createdAt),
+				updatedAt: new Date(item.updatedAt)
+			};
+		});
+		return data;
+	} else {
+		throw Error(json.error);
+	}
+}

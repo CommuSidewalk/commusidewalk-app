@@ -1,25 +1,44 @@
 <script>
-	import DateRange from './DateRange.svelte';
+	import L from 'leaflet';
 
-	export let map;
-	export let layers;
-
-	let showVillageLayer = true;
-
-	$: if (showVillageLayer) {
-		map.addLayer(layers.village);
-	} else {
-		map.removeLayer(layers.village);
+	class Control extends L.Control {
+		constructor(el, position) {
+			super({ position });
+			this.el = el;
+		}
+		onAdd() {
+			return this.el;
+		}
+		onRemove() {}
 	}
 
-	function handleDateChange(e) {
-		const { start, last } = e.detail;
-		map.filterPoints(start, last);
+	import { getContext } from 'svelte';
+	let classNames = undefined;
+	export { classNames as class };
+
+	/** position: 'topleft' | 'topright' | 'bottomleft' | 'bottomright' */
+	export let position;
+
+	/** The control instance created by this component */
+	export let control = undefined;
+	const map = getContext('map')();
+
+	function createControl(container) {
+		console.log(container);
+		control = new Control(container, position).addTo(map);
+		return {
+			destroy() {
+				control.remove();
+				control = undefined;
+			}
+		};
 	}
 </script>
 
-<label>
-	<input type="checkbox" bind:checked={showVillageLayer} />
-	顯示村里界
-	<DateRange on:change={handleDateChange} />
-</label>
+<div style="display:hidden">
+	<div use:createControl class={classNames}>
+		{#if control}
+			<slot {control} />
+		{/if}
+	</div>
+</div>

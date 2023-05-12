@@ -1,7 +1,11 @@
 import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 import Popup from '$lib/components/Popup.svelte';
 
-function onGetUserLatLng(cb) {
+/**
+ * 取得使用者經緯度，並執行 callback function
+ * @param {function} callback - 回呼函數
+ */
+export function onGetUserLatLng(callback) {
 	if (!navigator.geolocation) {
 		console.log('Geolocation is not supported by this browser.');
 		return;
@@ -9,7 +13,7 @@ function onGetUserLatLng(cb) {
 	navigator.geolocation.getCurrentPosition(
 		(position) => {
 			const { latitude, longitude } = position.coords;
-			cb([latitude, longitude]);
+			callback([latitude, longitude]);
 		},
 		(error) => {
 			switch (error.code) {
@@ -31,9 +35,9 @@ export async function initMap(el, data) {
 	const L = await import('leaflet');
 	const map = L.map(el, { preferCanvas: true }).setView([25.0453, 121.5403], 13);
 
-	onGetUserLatLng((latlng) => {
-		map.flyTo(latlng);
-	});
+	map.flyToUserLocation = function () {
+		onGetUserLatLng((latlng) => map.flyTo(latlng));
+	};
 
 	// base layer
 	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

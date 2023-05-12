@@ -16,6 +16,6 @@ export async function GET(e) {
 		return json({ data });
 	} catch (err) {
 		console.log(err);
-		throw error(500, { error: err });
+		throw error(500);
 	}
 }

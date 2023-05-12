@@ -7,6 +7,6 @@ import { fetchData } from '$lib/utils/fetch-data';
 /** @type {import('./$types').PageLoad} */
 export async function load({ fetch }) {
 	return {
-		data: await fetchData(fetch)
+		sidewalkData: await fetchData(fetch)
 	};
 }

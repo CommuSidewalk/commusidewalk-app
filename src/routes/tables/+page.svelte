@@ -61,17 +61,27 @@
 	<meta name="description" content="統計圖表" />
 </svelte:head>
 
-<div class="container">
+<div class="content">
 	<DateRange on:change={handleDateChange} />
-	<label for="intervalDays">區間日數</label>
-	<input id="intervalDays" bind:value={intervalDays} on:input={handleInput} type="number" min="1" />
+	<div class="interval-days-block">
+		<label for="intervalDays">區間日數</label>
+		<input
+			id="intervalDays"
+			bind:value={intervalDays}
+			on:input={handleInput}
+			type="number"
+			min="1"
+		/>
+	</div>
 	<CountySelect on:selectV2={handleCountySelect} countyData={data.countyData} maxLevel={3} />
 	<Tabulator data={tableData} {config} />
 </div>
 
 <style>
-	.container {
+	.content {
 		width: 100vw;
-		margin: 2vh 3vw;
+	}
+	.interval-days-block {
+		margin: 1em 0;
 	}
 </style>

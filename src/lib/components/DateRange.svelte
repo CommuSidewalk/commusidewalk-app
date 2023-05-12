@@ -18,11 +18,21 @@
 	}
 </script>
 
-<div>
-	<label for="start">起始日期</label>
-	<input id="start" bind:value={startVal} type="date" />
+<div class="daterange">
+	<div>
+		<label for="start">起始日期</label>
+		<input id="start" bind:value={startVal} type="date" />
+	</div>
+	<div>
+		<label for="start">結束日期</label>
+		<input id="last" bind:value={lastVal} type="date" />
+	</div>
 </div>
-<div>
-	<label for="start">結束日期</label>
-	<input id="last" bind:value={lastVal} type="date" />
-</div>
+
+<style>
+	.daterange {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+</style>
