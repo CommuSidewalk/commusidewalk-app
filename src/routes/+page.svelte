@@ -1,12 +1,12 @@
 <script>
-	import L from 'leaflet';
-	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 	import Control from '$lib/components/Control.svelte';
 	import Leaflet from '$lib/components/Leaflet.svelte';
 	import ControlPanel from '$lib/components/ControlPanel.svelte';
+	import SidewalkPopupContent from '$lib/components/SidewalkPopupContent.svelte';
 	import { rank2Color } from '$lib/utils/rank2Color.js';
 	import { fetchDateRangeData } from '$lib/utils/fetch-data.js';
-	import SidewalkPopupContent from '$lib/components/SidewalkPopupContent.svelte';
+	import { browser } from '$app/environment';
+	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -27,20 +27,6 @@
 
 	function resetMapView() {
 		map.setView(initialView, 5);
-	}
-
-	$: if (map) {
-		sidewalkLayer = L.layerGroup();
-		map.addLayer(sidewalkLayer);
-		addPointsToLayer(data.sidewalkData, sidewalkLayer);
-
-		// WMTS 村里界圖層
-		villageLayer = L.tileLayer(
-			'https://wmts.nlsc.gov.tw/wmts/Village/default/GoogleMapsCompatible/{z}/{y}/{x}',
-			{
-				maxZoom: 19
-			}
-		).addTo(map);
 	}
 
 	function addPointsToLayer(points, layer) {
@@ -72,6 +58,21 @@
 		addPointsToLayer(filteredData, sidewalkLayer);
 	}
 
+	async function initLeaflet() {
+		const L = await import('leaflet');
+		sidewalkLayer = L.layerGroup();
+		map.addLayer(sidewalkLayer);
+		addPointsToLayer(data.sidewalkData, sidewalkLayer);
+
+		// WMTS 村里界圖層
+		villageLayer = L.tileLayer(
+			'https://wmts.nlsc.gov.tw/wmts/Village/default/GoogleMapsCompatible/{z}/{y}/{x}',
+			{
+				maxZoom: 19
+			}
+		).addTo(map);
+	}
+
 	const attribution =
 		'&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>, 村里界圖 &copy; <a href="https://data.gov.tw/dataset/17219">內政部國土測繪中心</a>, 人行道標註資料 &copy; <a href="https://commutag.agawork.tw/dataset?id=63528cc34f042e88cc951433">平安走路許願帳戶-行人庇護空間</a>';
 </script>
@@ -91,6 +92,9 @@
 			{/if}
 		</ControlPanel>
 	</Control>
+	{#if map}
+		<div use:initLeaflet />
+	{/if}
 	<!-- Too lag -->
 	<!-- {#each data.sidewalkData as point} -->
 	<!--   <CircleMarker latlng={[point.lat, point.lng]} color={rank2Color(point.rankA1)} radius={5} stroke={false}> -->

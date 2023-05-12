@@ -1,17 +1,4 @@
 <script>
-	import L from 'leaflet';
-
-	class Control extends L.Control {
-		constructor(el, position) {
-			super({ position });
-			this.el = el;
-		}
-		onAdd() {
-			return this.el;
-		}
-		onRemove() {}
-	}
-
 	import { getContext } from 'svelte';
 	let classNames = undefined;
 	export { classNames as class };
@@ -23,8 +10,20 @@
 	export let control = undefined;
 	const map = getContext('map')();
 
-	function createControl(container) {
-		console.log(container);
+	async function createControl(container) {
+		const L = await import('leaflet');
+
+		class Control extends L.Control {
+			constructor(el, position) {
+				super({ position });
+				this.el = el;
+			}
+			onAdd() {
+				return this.el;
+			}
+			onRemove() {}
+		}
+
 		control = new Control(container, position).addTo(map);
 		return {
 			destroy() {

@@ -1,6 +1,5 @@
 <script>
 	import { createEventDispatcher, setContext } from 'svelte';
-	import L from 'leaflet';
 	import 'leaflet/dist/leaflet.css';
 
 	export let height = '100%';
@@ -27,7 +26,8 @@
 	setContext('layer', getMap);
 	setContext('map', getMap);
 
-	function createLeaflet(node) {
+	async function createLeaflet(node) {
+		const L = await import('leaflet');
 		map = L.map(node).on('zoom', (e) => dispatch('zoom', e));
 		if (bounds) {
 			map.fitBounds(bounds);
