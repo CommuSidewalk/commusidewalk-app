@@ -118,7 +118,7 @@
 	</p>
 
 	<h3>聯絡資訊</h3>
-	<p>bluebetweenneck@gmail.com</p>
+	<p>關於本站若有疑問，請用電子信箱與我聯繫 bluebetweenneck@gmail.com</p>
 </div>
 
 <style>

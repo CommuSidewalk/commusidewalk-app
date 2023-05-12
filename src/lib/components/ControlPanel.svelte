@@ -1,9 +1,9 @@
 <script>
 	import { getContext } from 'svelte';
 	import DateRange from './DateRange.svelte';
-	import { onGetUserLatLng } from '../../routes/map';
 	import ColorLegend from './ColorLegend.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import { onGetUserLatLng } from '$lib/utils/onGetUserLatLng';
 
 	export let villageLayer = undefined;
 

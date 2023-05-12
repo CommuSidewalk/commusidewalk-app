@@ -27,3 +27,5 @@ export type SidewalkPoint = {
   villName: string;
   villCode: string;
 };
+
+export type LatLng = [number, number];

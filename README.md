@@ -13,7 +13,7 @@
 本站以 nodejs 為底，網頁框架為 sveltekit，套件管理器是 yarn。
 
 ```sh
-git clone https://github.com/FOBshippingpoint/commusidewalk-app.git # 克隆到你的電腦
+git clone https://github.com/CommuSidewalk/commusidewalk-app.git # 克隆到你的電腦
 cd commusidewalk-app # 切換至專案目錄
 
 yarn        # 安裝必要套件
@@ -24,13 +24,21 @@ yarn format # format 所有檔案
 yarn build  # 打包
 ```
 
+## TODO
+
+- [ ] 撰寫測試
+- [ ] 撰寫文件
+- [ ] 重構API
+- [ ] 重構chart
+- [ ] CountySelect migrate to selectV2
+
 ## 更新資料
 
 更新資料有手動或自動兩種方法。
 
 ### 手動
 
-至 [commusidewalk/output](https://github.com/FOBshippingpoint/commusidewalk) 下載最新 village 結尾的 csv 檔。然後重新命名檔案為`data.csv`並放入`static/data/`底下。接著打開`.env`檔編輯`PUBLIC_UPDATE_DATE`成對應日期(如果`.env`檔案不存在請自行新增)。
+至 [commusidewalk/output](https://github.com/CommuSidewalk/commusidewalk) 下載最新 village 結尾的 csv 檔。然後重新命名檔案為`data.csv`並放入`static/data/`底下。接著打開`.env`檔編輯`PUBLIC_UPDATE_DATE`成對應日期(如果`.env`檔案不存在請自行新增)。
 
 ```text
 # .env 範例

@@ -16,12 +16,7 @@
 	let sidewalkLayer;
   let L = undefined;
 
-  /**
-   * LatLng array.
-   * @typedef {Array.<number>}
-   * @property {number} 0 - The first element of the array.
-   * @property {number} 1 - The second element of the array.
-   */
+  /** @type {import('$lib/types').LatLng} */
 	const initialView = [25.0453, 121.5403]; // 初始經緯度，台北市某處
 
 	function resizeMap() {
