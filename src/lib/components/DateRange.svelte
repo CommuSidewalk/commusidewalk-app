@@ -4,17 +4,18 @@
 	const dispatch = createEventDispatcher();
 
 	// inclusive boundaries
+  /** @type {Date|null} */
 	export let start = null;
-	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! should rename to "end"
-	export let last = null;
+  /** @type {Date|null} */
+	export let end = null;
 
 	let startVal = '';
-	let lastVal = '';
+	let endVal = '';
 
 	$: {
 		start = startVal === '' ? null : new Date(startVal);
-		last = lastVal === '' ? null : new Date(lastVal);
-		dispatch('change', { start, last });
+		end = endVal === '' ? null : new Date(endVal);
+		dispatch('change', { start, end });
 	}
 </script>
 
@@ -25,7 +26,7 @@
 	</div>
 	<div>
 		<label for="start">結束日期</label>
-		<input id="last" bind:value={lastVal} type="date" />
+		<input id="end" bind:value={endVal} type="date" />
 	</div>
 </div>
 

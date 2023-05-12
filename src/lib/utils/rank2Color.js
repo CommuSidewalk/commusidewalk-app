@@ -1,6 +1,6 @@
 /**
- * @param {number} rank
- * @return {string} color
+ * @param {number} rank - rankA1 score.
+ * @return {string} color - hex color.
  */
 export function rank2Color(rank) {
 	const turboColors = [

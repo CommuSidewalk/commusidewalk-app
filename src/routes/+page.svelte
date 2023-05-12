@@ -59,8 +59,8 @@
 
 	async function handleFilterDateRange(e) {
 		if (!sidewalkLayer) return;
-		const { start, last } = e.detail;
-		const filteredData = await fetchDateRangeData(fetch, start, last);
+		const { start, end } = e.detail;
+		const filteredData = await fetchDateRangeData(fetch, start, end);
 		sidewalkLayer.clearLayers();
 		addPointsToLayer(filteredData, sidewalkLayer);
 	}

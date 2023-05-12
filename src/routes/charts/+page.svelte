@@ -65,12 +65,12 @@
 	}
 
 	function handleDateChange(e) {
-		const { start, last } = e.detail;
-		config = { ...config, start, last };
+		const { start, end } = e.detail;
+		config = { ...config, start, last: end };
 		chart?.select(selected, {
 			...config,
 			start,
-			last
+			last: end
 		});
 	}
 </script>

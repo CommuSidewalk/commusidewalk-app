@@ -37,7 +37,7 @@
 	}
 
 	function handleDateChange(e) {
-		filterConfig = { ...filterConfig, startDate: e.detail.start, endDate: e.detail.last };
+		filterConfig = { ...filterConfig, startDate: e.detail.start, endDate: e.detail.end };
 		updateTableData();
 	}
 
