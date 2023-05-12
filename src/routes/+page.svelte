@@ -1,18 +1,17 @@
 <script>
+	import Loading from '$lib/components/Loading.svelte';
 	import Control from '$lib/components/Control.svelte';
 	import Leaflet from '$lib/components/Leaflet.svelte';
 	import ControlPanel from '$lib/components/ControlPanel.svelte';
 	import SidewalkPopupContent from '$lib/components/SidewalkPopupContent.svelte';
 	import { rank2Color } from '$lib/utils/rank2Color.js';
 	import { fetchDateRangeData } from '$lib/utils/fetch-data.js';
-	import { browser } from '$app/environment';
 	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
 
 	let map;
-	let layerGroup;
 	let villageLayer;
 	let sidewalkLayer;
 
@@ -83,6 +82,9 @@
 </svelte:head>
 <svelte:window on:resize={resizeMap} />
 
+{#if !map}
+	<Loading />
+{/if}
 <Leaflet bind:map view={initialView} zoom={13} maxZoom={19} {attribution}>
 	<Control position="topright">
 		<ControlPanel {villageLayer} on:filter-date-range={handleFilterDateRange}>
