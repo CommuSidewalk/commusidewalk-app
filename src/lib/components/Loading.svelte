@@ -11,7 +11,6 @@
 			loading.push(0);
 			loading = loading;
 		}
-		console.log('loading');
 	}, intervalMs);
 
 	onDestroy(() => clearInterval(interval));

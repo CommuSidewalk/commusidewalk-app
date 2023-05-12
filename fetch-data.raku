@@ -1,15 +1,12 @@
 mkdir('static/data');
 
 # download csv from commusidewalk-data repo
-sub download-csv-by-date(Date $date) {
-  my $csv-url = 'https://raw.githubusercontent.com/CommuSidewalk/commusidewalk-data/master/output/village.csv';
-  say 'Download from: ' ~ $csv-url;
-  run 'curl', $csv-url, '-o', 'static/data/data.csv';
-}
+my $csv-url = 'https://raw.githubusercontent.com/CommuSidewalk/commusidewalk-data/master/output/village.csv';
+say 'Download from: ' ~ $csv-url;
+run 'curl', $csv-url, '-o', 'static/data/data.csv';
+say "download complete";
 
 my $date = Date.today;
-
-say "download complete";
 
 # update .env update_date YYYY/mm/dd
 my $update-date = $date.yyyy-mm-dd('/');

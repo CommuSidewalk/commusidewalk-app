@@ -14,9 +14,15 @@
 	let map;
 	let villageLayer;
 	let sidewalkLayer;
+  let L = undefined;
 
-	// 初始經緯度，台北市某處
-	const initialView = [25.0453, 121.5403];
+  /**
+   * LatLng array.
+   * @typedef {Array.<number>}
+   * @property {number} 0 - The first element of the array.
+   * @property {number} 1 - The second element of the array.
+   */
+	const initialView = [25.0453, 121.5403]; // 初始經緯度，台北市某處
 
 	function resizeMap() {
 		if (map) {
@@ -24,11 +30,13 @@
 		}
 	}
 
-	function resetMapView() {
-		map.setView(initialView, 5);
-	}
-
+  /** 
+  * Add sidewalk points into map layer.
+  * @param {import('$lib/types.d.ts').SidewalkPoint[]} points - sidewalk points.
+  * @param {Object} layer - Leaflet Layer.
+  */
 	function addPointsToLayer(points, layer) {
+    if (!L) return;
 		points.forEach((point) => {
 			const marker = L.circleMarker([point.lat, point.lng], {
 				color: rank2Color(point.rankA1),
@@ -58,7 +66,7 @@
 	}
 
 	async function initLeaflet() {
-		const L = await import('leaflet');
+		L = await import('leaflet');
 		sidewalkLayer = L.layerGroup();
 		map.addLayer(sidewalkLayer);
 		addPointsToLayer(data.sidewalkData, sidewalkLayer);
