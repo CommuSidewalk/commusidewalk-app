@@ -9,7 +9,7 @@
 
 	let map = getContext('map')();
 	let showVillageLayer = false;
-	let show = true;
+	let show = false;
 
 	const dispatch = createEventDispatcher();
 
