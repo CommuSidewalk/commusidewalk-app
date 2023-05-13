@@ -11,9 +11,7 @@
 	const map = getContext('map')();
 
 	async function createControl(container) {
-		const L = await import('leaflet');
-
-		class Control extends L.Control {
+		class Control extends window.L.Control {
 			constructor(el, position) {
 				super({ position });
 				this.el = el;
@@ -23,6 +21,11 @@
 			}
 			onRemove() {}
 		}
+
+    // 避免無法滾動control的問題
+    // ref: https://github.com/Leaflet/Leaflet/issues/5781#issuecomment-330439505
+    window.L.DomEvent.disableScrollPropagation(container);
+    window.L.DomEvent.disableClickPropagation(container);
 
 		control = new Control(container, position).addTo(map);
 		return {
@@ -34,7 +37,7 @@
 	}
 </script>
 
-<div style="display:hidden">
+<div  style="display:hidden">
 	<div use:createControl class={classNames}>
 		{#if control}
 			<slot {control} />

@@ -62,12 +62,11 @@
 	}
 
 	async function initLeaflet() {
-		await import('leaflet');
 		await import('leaflet.markercluster');
 
 		sidewalkLayer = window.L.markerClusterGroup({
 			chunkedLoading: true,
-      disableClusteringAtZoom: 13,
+      disableClusteringAtZoom: 15,
 			iconCreateFunction: function (cluster) {
 				var childCount = cluster.getChildCount();
 
@@ -119,7 +118,7 @@
 	{/if}
 	<!-- Too lag -->
 	<!-- {#each data.sidewalkData as point} -->
-	<!--   <CircleMarker latlng={[point.lat, point.lng]} color={rank2Color(point.rankA1)} radius={8} stroke={false}> -->
+	<!--   <CircleMarker latlng={[point.lat, point.lng]} color={rank2Color(point.rankA1)} radius={10} stroke={false}> -->
 	<!--     <Popup> -->
 	<!--         <SidewalkPopup {...point} /> -->
 	<!--     </Popup> -->

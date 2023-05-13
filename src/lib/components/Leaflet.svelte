@@ -27,15 +27,15 @@
 	setContext('map', getMap);
 
 	async function createLeaflet(node) {
-		const L = await import('leaflet');
-		map = L.map(node).on('zoom', (e) => dispatch('zoom', e));
+		await import('leaflet');
+		map = window.L.map(node).on('zoom', (e) => dispatch('zoom', e));
 		if (bounds) {
 			map.fitBounds(bounds);
 		} else {
 			map.setView(view, zoom);
 		}
 
-		L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+		window.L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
 			attribution,
 			subdomains: 'abcd',
 			maxZoom,
