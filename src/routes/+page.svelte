@@ -7,6 +7,8 @@
 	import { rank2Color } from '$lib/utils/rank2Color.js';
 	import { fetchDateRangeData } from '$lib/utils/fetch-data.js';
 	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
+	import '$lib/css/MarkerCluster.css';
+	import '$lib/css/MarkerCluster.Default.css';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -14,9 +16,8 @@
 	let map;
 	let villageLayer;
 	let sidewalkLayer;
-  let L = undefined;
 
-  /** @type {import('$lib/types').LatLng} */
+	/** @type {import('$lib/types').LatLng} */
 	const initialView = [25.0453, 121.5403]; // 初始經緯度，台北市某處
 
 	function resizeMap() {
@@ -25,15 +26,15 @@
 		}
 	}
 
-  /** 
-  * Add sidewalk points into map layer.
-  * @param {import('$lib/types.d.ts').SidewalkPoint[]} points - sidewalk points.
-  * @param {Object} layer - Leaflet Layer.
-  */
+	/**
+	 * Add sidewalk points into map layer.
+	 * @param {import('$lib/types.d.ts').SidewalkPoint[]} points - sidewalk points.
+	 * @param {Object} layer - Leaflet Layer.
+	 */
 	function addPointsToLayer(points, layer) {
-    if (!L) return;
+		if (!L) return;
 		points.forEach((point) => {
-			const marker = L.circleMarker([point.lat, point.lng], {
+			const marker = window.L.circleMarker([point.lat, point.lng], {
 				color: rank2Color(point.rankA1),
 				fillOpacity: 0.5,
 				stroke: false,
@@ -41,7 +42,7 @@
 			}).addTo(layer);
 
 			marker.bindPopup(() => {
-				const container = L.DomUtil.create('div');
+				const container = window.L.DomUtil.create('div');
 				new SidewalkPopupContent({
 					target: container,
 					props: { ...point }
@@ -61,13 +62,29 @@
 	}
 
 	async function initLeaflet() {
-		L = await import('leaflet');
-		sidewalkLayer = L.layerGroup();
+		await import('leaflet');
+		await import('leaflet.markercluster');
+
+		sidewalkLayer = window.L.markerClusterGroup({
+			chunkedLoading: true,
+      disableClusteringAtZoom: 13,
+			iconCreateFunction: function (cluster) {
+				var childCount = cluster.getChildCount();
+
+				var c = ' marker-cluster-small';
+				return new window.L.DivIcon({
+					html: '<div><span>' + childCount + '</span></div>',
+					className: 'marker-cluster' + c,
+					iconSize: new window.L.Point(40, 40)
+				});
+			}
+		});
+
 		map.addLayer(sidewalkLayer);
 		addPointsToLayer(data.sidewalkData, sidewalkLayer);
 
 		// WMTS 村里界圖層
-		villageLayer = L.tileLayer(
+		villageLayer = window.L.tileLayer(
 			'https://wmts.nlsc.gov.tw/wmts/Village/default/GoogleMapsCompatible/{z}/{y}/{x}',
 			{
 				maxZoom: 19
@@ -102,7 +119,7 @@
 	{/if}
 	<!-- Too lag -->
 	<!-- {#each data.sidewalkData as point} -->
-	<!--   <CircleMarker latlng={[point.lat, point.lng]} color={rank2Color(point.rankA1)} radius={5} stroke={false}> -->
+	<!--   <CircleMarker latlng={[point.lat, point.lng]} color={rank2Color(point.rankA1)} radius={8} stroke={false}> -->
 	<!--     <Popup> -->
 	<!--         <SidewalkPopup {...point} /> -->
 	<!--     </Popup> -->

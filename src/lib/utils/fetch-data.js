@@ -74,7 +74,7 @@ export async function fetchTableData(fetch, intervalDays, filterConfig = {}) {
 	}
 }
 
-export async function fetchDateRangeData(fetch, start, end) {
+export async function fetchDateRangeData(fetch, start = null, end = null) {
 	const params = new URLSearchParams();
 	params.set('start', start);
 	params.set('end', end);

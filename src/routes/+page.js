@@ -2,11 +2,11 @@
 // it so that it gets served as a static asset in production
 export const prerender = false;
 
-import { fetchData } from '$lib/utils/fetch-data';
+import { fetchDateRangeData } from '$lib/utils/fetch-data';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ fetch }) {
 	return {
-		sidewalkData: await fetchData(fetch)
+		sidewalkData: await fetchDateRangeData(fetch)
 	};
 }

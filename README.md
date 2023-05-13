@@ -28,8 +28,8 @@ yarn build  # 打包
 
 - [ ] 撰寫測試
 - [ ] 撰寫文件
-- [ ] 重構API
-- [ ] 重構chart
+- [ ] 重構 API
+- [ ] 重構 chart
 - [ ] CountySelect migrate to selectV2
 
 ## 更新資料

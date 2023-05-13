@@ -4,9 +4,9 @@
 	const dispatch = createEventDispatcher();
 
 	// inclusive boundaries
-  /** @type {Date|null} */
+	/** @type {Date|null} */
 	export let start = null;
-  /** @type {Date|null} */
+	/** @type {Date|null} */
 	export let end = null;
 
 	let startVal = '';

@@ -1,7 +1,9 @@
 import { parseData } from '$lib/server/parse-data';
 import { filterDateRange } from '$lib/server/utils/filter-data';
 import { error, json } from '@sveltejs/kit';
+import _ from 'lodash';
 
+/** @type {import('./$types').RequestHandler} */
 export async function GET(e) {
 	let start = e.url.searchParams.get('start');
 	let end = e.url.searchParams.get('end');
@@ -15,8 +17,20 @@ export async function GET(e) {
 	try {
 		let data;
 		data = await parseData();
-		console.log(start, end);
 		data = filterDateRange(data, start, end);
+		data = _.map(data, (obj) =>
+			_.pick(obj, [
+				'imgUrl',
+				'rankA1',
+				'countyName',
+				'townName',
+				'villName',
+				'lat',
+				'lng',
+				'createdAt',
+				'remark'
+			])
+		);
 		return json({ data });
 	} catch (err) {
 		console.log(err);
