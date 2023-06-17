@@ -1,7 +1,7 @@
 mkdir('static/data');
 
 # download csv from commusidewalk-data repo
-my $csv-url = 'https://raw.githubusercontent.com/CommuSidewalk/commusidewalk-data/master/output/village.csv';
+my $csv-url = 'https://nextcloud.sdovan1.com/s/GHWHZXpoK78DFMb/download?path=&files=data.csv';
 say 'Download from: ' ~ $csv-url;
 run 'curl', $csv-url, '-o', 'static/data/data.csv';
 say "download complete";
