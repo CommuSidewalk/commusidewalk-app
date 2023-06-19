@@ -74,10 +74,10 @@
 				const childCount = cluster.getChildCount();
         const markers = cluster.getAllChildMarkers();
 
-				const c = ' marker-cluster-small';
+				const classNameOfRankColor = 'marker-cluster-' + Math.round(10 - _.meanBy(markers, "rankA1"))
 				return new window.L.DivIcon({
 					html: '<div><span>' + childCount + '</span></div>',
-					className: 'marker-cluster marker-cluster-' + Math.round(10 - _.meanBy(markers, "rankA1")),
+					className: 'marker-cluster ' + classNameOfRankColor,
 					iconSize: new window.L.Point(40, 40)
 				});
 			}

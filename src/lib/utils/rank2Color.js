@@ -14,6 +14,7 @@ export function rank2Color(rank) {
 		'#FFA41C',
 		'#FF661D',
 		'#FF2B1F',
+		'#D3022F'
 	];
 
 	const index = Math.round(10 - rank);
