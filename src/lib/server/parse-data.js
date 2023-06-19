@@ -1,21 +1,26 @@
 import fetch from 'node-fetch';
 import Papa from 'papaparse';
+import TimeCache from './utils/timer-cache';
+import { CSV_DOWNLOAD_URL } from '$env/static/private';
 
 /**
  * @typedef SidewalkPoint
  * @type {import('$lib/types').SidewalkPoint} */
+const cache = new TimeCache();
 
-/** @type {SidewalkPoint[]} */
-let cachedData;
-
+/**
+* 
+* @returns {Promise<SidewalkPoint[]>}
+* 
+*/
 async function parse() {
-	const response = await fetch('https://commusidewalk-app.vercel.app/data/data.csv');
+	const response = await fetch(CSV_DOWNLOAD_URL);
 	const csv = await response.text();
 	const results = Papa.parse(csv, {
 		skipEmptyLines: true,
 		header: true
 	});
-	cachedData = results.data.map((item) => {
+  return results.data.map((item) => {
 		return {
 			...item,
 			rankA1: parseFloat(item.rankA1),
@@ -26,7 +31,6 @@ async function parse() {
 			updatedAt: new Date(item.updatedAt)
 		};
 	});
-	return cachedData;
 }
 
 /**
@@ -35,12 +39,12 @@ async function parse() {
  */
 export async function parseData() {
 	return new Promise((resolve, reject) => {
-		if (cachedData) {
-			return resolve(cachedData);
+		if (cache.get("data")) {
+			return resolve(cache.get("data"));
 		}
 		try {
 			const data = parse();
-			cachedData = data;
+      cache.set("data", data, 1, TimeCache.DAYS)
 			resolve(data);
 		} catch (err) {
 			reject(err);

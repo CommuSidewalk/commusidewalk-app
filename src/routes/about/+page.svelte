@@ -1,6 +1,6 @@
 <script>
-	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 	import logoLASS from '$lib/assets/logo-lass.jpg';
+	import UpdateDate from '$lib/components/UpdateDate.svelte';
 </script>
 
 <svelte:head>
@@ -30,8 +30,7 @@
 	</ul>
 	<p>地圖上的點位著色是以 a1 加權法為基準。</p>
 
-	<h3>資料更新時間</h3>
-	<span>{PUBLIC_UPDATE_DATE}</span>
+  <UpdateDate/>
 
 	<h3>相關連結</h3>
 	<div class="icon-list">

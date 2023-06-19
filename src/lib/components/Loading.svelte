@@ -1,7 +1,7 @@
 <script>
 	import { onDestroy } from 'svelte';
 
-	export let intervalMs = 1;
+	export let intervalMs = 300;
 	let loading = [0, 0, 0];
 
 	const interval = setInterval(() => {

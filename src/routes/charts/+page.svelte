@@ -1,10 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 	import { initChart } from './chart';
-	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
-	import Papa from 'papaparse';
 	import DateRange from '$lib/components/DateRange.svelte';
 	import CountySelect from '$lib/components/CountySelect.svelte';
+	import UpdateDate from '$lib/components/UpdateDate.svelte';
 
 	let selected;
 	let chart;
@@ -117,7 +116,7 @@
 			</div>
 		{/if}
 	{/if}
-	<div>資料更新時間：{PUBLIC_UPDATE_DATE}</div>
+  <UpdateDate/>
 	<div id="main" bind:this={chartEl} />
 </div>
 

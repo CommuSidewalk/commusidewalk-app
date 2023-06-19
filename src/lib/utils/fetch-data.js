@@ -99,3 +99,15 @@ export async function fetchDateRangeData(fetch, start = null, end = null) {
 		throw Error(json.error);
 	}
 }
+
+/**
+ * @param {fetch} fetch
+ */
+export async function fetchLatestDataDate(fetch) {
+  const response = await fetch('/api/latest-data-date')
+  const json = await response.json();
+  
+  if(response.status === 200) {
+    return json.date
+  }
+}

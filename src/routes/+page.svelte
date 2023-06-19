@@ -6,9 +6,11 @@
 	import SidewalkPopupContent from '$lib/components/SidewalkPopupContent.svelte';
 	import { rank2Color } from '$lib/utils/rank2Color.js';
 	import { fetchDateRangeData } from '$lib/utils/fetch-data.js';
-	import { PUBLIC_UPDATE_DATE } from '$env/static/public';
 	import '$lib/css/MarkerCluster.css';
 	import '$lib/css/MarkerCluster.Default.css';
+	import UpdateDate from '$lib/components/UpdateDate.svelte';
+  import _ from 'lodash';
+	import CircleMarker from '$lib/components/CircleMarker.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -41,6 +43,7 @@
 				radius: 5
 			}).addTo(layer);
 
+      marker.rankA1 = point.rankA1;
 			marker.bindPopup(() => {
 				const container = window.L.DomUtil.create('div');
 				new SidewalkPopupContent({
@@ -68,12 +71,13 @@
 			chunkedLoading: true,
       disableClusteringAtZoom: 15,
 			iconCreateFunction: function (cluster) {
-				var childCount = cluster.getChildCount();
+				const childCount = cluster.getChildCount();
+        const markers = cluster.getAllChildMarkers();
 
-				var c = ' marker-cluster-small';
+				const c = ' marker-cluster-small';
 				return new window.L.DivIcon({
 					html: '<div><span>' + childCount + '</span></div>',
-					className: 'marker-cluster' + c,
+					className: 'marker-cluster marker-cluster-' + Math.round(10 - _.meanBy(markers, "rankA1")),
 					iconSize: new window.L.Point(40, 40)
 				});
 			}
@@ -109,7 +113,7 @@
 		<ControlPanel {villageLayer} on:filter-date-range={handleFilterDateRange}>
 			{#if data.sidewalkData}
 				<div>標註總數：{data.sidewalkData.length}</div>
-				<div>資料更新時間：{PUBLIC_UPDATE_DATE}</div>
+        <UpdateDate/>
 			{/if}
 		</ControlPanel>
 	</Control>
