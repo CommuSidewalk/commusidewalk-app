@@ -1,24 +1,18 @@
-= 平安走路許願帳戶Web App
+= 平安走路許願帳戶WebApp
 CC Lan <https://github.com/FOBshippingpoint[@FOBshippingpoint]>
 v1.0, 2023-06-20
 
+
+ifndef::env-github[:icons: font]
 ifdef::env-github[]
-:imagesdir:
- https://gist.githubusercontent.com/path/to/gist/revision/dir/with/all/images
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
+:status:
 :caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
-ifndef::env-github[]
-:imagesdir: ./
-endif::[]
-:toc:
-:toc-title: 目錄
-:toc-placement!:
 
-toc::[]
 
 // Refs
 :main-doc-ref: https://docs.google.com/document/d/1b_00BjDMkuyZISHzfEKU9DDw32BqmQ95k-O-bshxBQ0/edit
@@ -39,10 +33,6 @@ commusidewalk-app為平安走路許願帳戶的結果展示網頁，其資料來
 * 經營群眾壓力改變管理策略，讓你我老後、至親好友有安全行走空間。
 * 提供交通及工務單位具體規劃與追蹤管理的參照資料。
 --
-
-
-
-
 
 === 網頁截圖
 
