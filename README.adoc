@@ -1,0 +1,108 @@
+= 平安走路許願帳戶Web App
+CC Lan <https://github.com/FOBshippingpoint[@FOBshippingpoint]>
+v1.0, 2023-06-20
+
+ifdef::env-github[]
+:imagesdir:
+ https://gist.githubusercontent.com/path/to/gist/revision/dir/with/all/images
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+ifndef::env-github[]
+:imagesdir: ./
+endif::[]
+:toc:
+:toc-title: 目錄
+:toc-placement!:
+
+toc::[]
+
+// Refs
+:main-doc-ref: https://docs.google.com/document/d/1b_00BjDMkuyZISHzfEKU9DDw32BqmQ95k-O-bshxBQ0/edit
+:programming-doc-ref: https://docs.google.com/document/d/1rU3uT3WfwCt3sVCViWHzoIisY5P64AMGAUk9i2fiSEM/edit#
+:api-doc-ref: https://docs.google.com/document/d/1ziEal-ct8kgI2N_db41SLOtgksk2dz_AiWg_v5iuxco/edit#
+
+== 專案簡介
+
+commusidewalk-app為平安走路許願帳戶的結果展示網頁，其資料來自於 https://commutag.agawork.tw/[群眾標註平台]，經過 https://github.com/CommuSidewalk/commusidewalk-data[commusidewalk-data]進行資料轉換、評分計算。
+
+.平安許願帳戶簡介
+平安走路許願帳戶為一開源專案，其目標是希望提供公民參與及導出民眾的關心、呈現行人需求，由公民自主參與。最後的分析結果只能適合反映整體的樣態與民眾的經驗。 +
+進一步的探討或其他目的，都應該另執行更嚴謹的設計與取樣，取得更全面的數據。
+--
+收集各地行人庇護設施與空間的照片
+
+* 比對各縣市政府保障弱勢用路人的資源與策略，使民眾具體察覺交通保障落差。
+* 經營群眾壓力改變管理策略，讓你我老後、至親好友有安全行走空間。
+* 提供交通及工務單位具體規劃與追蹤管理的參照資料。
+--
+
+
+
+
+
+=== 網頁截圖
+
+image::https://i.imgur.com/IXxLy1q.png[網頁截圖-地圖]
+image::https://i.imgur.com/KGn1s1C.png[網頁截圖-人行道分數表格]
+
+=== 專案文件
+
+* {main-doc-ref}[主文件]
+* {programming-doc-ref}[本程式文件]
+* {api-doc-ref}[API文件]
+
+== 開發
+
+=== 準備
+
+commusidewalk-app是JavaScript撰寫的，網頁框架為 https://kit.svelte.dev/[sveltekit]。
+
+. clone repository
++
+[, sh]
+----
+git clone https://github.com/CommuSidewalk/commusidewalk-app.git
+cd commusidewalk-app # 切換至專案目錄
+----
+. 安裝必要套件
++
+[, sh]
+----
+yarn        # 安裝必要套件
+----
+. 開啟本機端伺服器
++
+[, sh]
+----
+yarn dev    # 開啟開發伺服器(按o可以打開瀏覽器)
+----
+
+--
+
+
+[TIP]
+====
+其他常用指令
+[, sh]
+----
+yarn format    # format 所有檔案
+yarn build     # 打包
+yarn test:unit # 單元測試
+----
+====
+--
+
+=== 相關套件
+
+_https://leafletjs.com/[Leaflet]_::
+地圖套件
+_https://echarts.apache.org/[Apache ECharts]_::
+圖表套件
+_https://lodash.com/[lodash]_::
+資料處理套件
+_https://tabulator.info/[Tabulator]_::
+表格套件
