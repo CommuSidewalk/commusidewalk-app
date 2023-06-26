@@ -4,6 +4,7 @@
 	import ColorLegend from './ColorLegend.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { onGetUserLatLng } from '$lib/utils/onGetUserLatLng';
+	import OnlineVisitorCount from './OnlineVisitorCount.svelte';
 
 	export let villageLayer = undefined;
 
@@ -92,6 +93,9 @@
 			<p>※1：評分公式見<a href="/about">關於本站</a></p>
 		</div>
 	{/if}
+  <div class="block">
+    <OnlineVisitorCount/>
+  </div>
 	<slot />
 </div>
 

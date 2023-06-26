@@ -52,14 +52,17 @@
 					>
 				</td>
 			</tr>
-      <tr>
+			<tr>
 				<th>事故型態</th>
 				<td>{generalView.accident_type_and_category_main_category_name}</td>
-      </tr>
-      <tr>
+			</tr>
+			<tr>
 				<th>事故原因</th>
-				<td>{generalView.accident_type_and_category_main_category_name} {generalView.accident_type_and_category_sub_category_name}</td>
-      </tr>
+				<td
+					>{generalView.accident_type_and_category_main_category_name}
+					{generalView.accident_type_and_category_sub_category_name}</td
+				>
+			</tr>
 		</table>
 	{:else}
 		<span>載入中...</span>
@@ -104,13 +107,12 @@
 							<td>{ev.party_action_status_sub_category_name}</td>
 						</tr>
 					{/if}
-					{#if ev.hit_and_run_category_name === "是"}
+					{#if ev.hit_and_run_category_name === '是'}
 						<tr>
 							<th>肇事逃逸</th>
 							<td>是</td>
 						</tr>
 					{/if}
-
 				</tbody>
 			</table>
 		{/each}
@@ -122,9 +124,9 @@
 <style>
 	section {
 		width: 20em;
-    max-height: 40em;
-    padding-bottom: 2em;
-    overflow: scroll;
+		max-height: 40em;
+		padding-bottom: 2em;
+		overflow: scroll;
 	}
 	.google-map-icon {
 		width: 18px;

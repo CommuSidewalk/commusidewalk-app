@@ -99,7 +99,7 @@
 	}
 
 	const attribution =
-		'&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>, 村里界圖 &copy; <a href="https://data.gov.tw/dataset/17219">內政部國土測繪中心</a>, 人行道標註資料 &copy; <a href="https://commutag.agawork.tw/dataset?id=63528cc34f042e88cc951433">平安走路許願帳戶-行人庇護空間</a>';
+		'&copy;<a href="https://carto.com/attributions" target="_blank">CARTO</a>, 交通事故資料 &copy; <a href="https://data.gov.tw/dataset/12818">即時交通事故資料(A1類)</a> <a href="https://data.gov.tw/dataset/13139">即時交通事故資料(A2類)</a>';
 </script>
 
 <svelte:head>
