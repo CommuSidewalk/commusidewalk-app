@@ -116,7 +116,7 @@
 			</div>
 		{/if}
 	{/if}
-  <UpdateDate/>
+	<UpdateDate />
 	<div id="main" bind:this={chartEl} />
 </div>
 

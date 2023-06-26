@@ -78,7 +78,7 @@
 	table {
 		margin-top: 0.5em;
 		width: 100%;
-    max-width: 250px;
+		max-width: 250px;
 		border-collapse: collapse;
 	}
 	th,

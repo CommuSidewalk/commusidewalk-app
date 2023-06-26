@@ -9,10 +9,10 @@ import { CSV_DOWNLOAD_URL } from '$env/static/private';
 const cache = new TimeCache();
 
 /**
-* 
-* @returns {Promise<SidewalkPoint[]>}
-* 
-*/
+ *
+ * @returns {Promise<SidewalkPoint[]>}
+ *
+ */
 async function parse() {
 	const response = await fetch(CSV_DOWNLOAD_URL);
 	const csv = await response.text();
@@ -20,7 +20,7 @@ async function parse() {
 		skipEmptyLines: true,
 		header: true
 	});
-  return results.data.map((item) => {
+	return results.data.map((item) => {
 		return {
 			...item,
 			rankA1: parseFloat(item.rankA1),
@@ -39,12 +39,12 @@ async function parse() {
  */
 export async function parseData() {
 	return new Promise((resolve, reject) => {
-		if (cache.get("data")) {
-			return resolve(cache.get("data"));
+		if (cache.get('data')) {
+			return resolve(cache.get('data'));
 		}
 		try {
 			const data = parse();
-      cache.set("data", data, 1, TimeCache.DAYS)
+			cache.set('data', data, 1, TimeCache.DAYS);
 			resolve(data);
 		} catch (err) {
 			reject(err);

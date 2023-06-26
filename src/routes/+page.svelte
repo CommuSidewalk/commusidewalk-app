@@ -9,7 +9,7 @@
 	import '$lib/css/MarkerCluster.css';
 	import '$lib/css/MarkerCluster.Default.css';
 	import UpdateDate from '$lib/components/UpdateDate.svelte';
-  import _ from 'lodash';
+	import _ from 'lodash';
 	import CircleMarker from '$lib/components/CircleMarker.svelte';
 
 	/** @type {import('./$types').PageData} */
@@ -35,6 +35,7 @@
 	 */
 	function addPointsToLayer(points, layer) {
 		if (!L) return;
+
 		points.forEach((point) => {
 			const marker = window.L.circleMarker([point.lat, point.lng], {
 				color: rank2Color(point.rankA1),
@@ -43,7 +44,7 @@
 				radius: 5
 			}).addTo(layer);
 
-      marker.rankA1 = point.rankA1;
+			marker.rankA1 = point.rankA1;
 			marker.bindPopup(() => {
 				const container = window.L.DomUtil.create('div');
 				new SidewalkPopupContent({
@@ -69,12 +70,13 @@
 
 		sidewalkLayer = window.L.markerClusterGroup({
 			chunkedLoading: true,
-      disableClusteringAtZoom: 15,
+			disableClusteringAtZoom: 15,
 			iconCreateFunction: function (cluster) {
 				const childCount = cluster.getChildCount();
-        const markers = cluster.getAllChildMarkers();
+				const markers = cluster.getAllChildMarkers();
 
-				const classNameOfRankColor = 'marker-cluster-' + Math.round(10 - _.meanBy(markers, "rankA1"))
+				const classNameOfRankColor =
+					'marker-cluster-' + Math.round(10 - _.meanBy(markers, 'rankA1'));
 				return new window.L.DivIcon({
 					html: '<div><span>' + childCount + '</span></div>',
 					className: 'marker-cluster ' + classNameOfRankColor,
@@ -113,7 +115,7 @@
 		<ControlPanel {villageLayer} on:filter-date-range={handleFilterDateRange}>
 			{#if data.sidewalkData}
 				<div>標註總數：{data.sidewalkData.length}</div>
-        <UpdateDate/>
+				<UpdateDate />
 			{/if}
 		</ControlPanel>
 	</Control>

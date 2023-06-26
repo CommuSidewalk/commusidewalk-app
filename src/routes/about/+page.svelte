@@ -30,7 +30,7 @@
 	</ul>
 	<p>地圖上的點位著色是以 a1 加權法為基準。</p>
 
-  <UpdateDate/>
+	<UpdateDate />
 
 	<h3>相關連結</h3>
 	<div class="icon-list">

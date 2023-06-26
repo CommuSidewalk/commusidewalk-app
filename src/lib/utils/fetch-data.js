@@ -104,10 +104,33 @@ export async function fetchDateRangeData(fetch, start = null, end = null) {
  * @param {fetch} fetch
  */
 export async function fetchLatestDataDate(fetch) {
-  const response = await fetch('/api/latest-data-date')
-  const json = await response.json();
-  
-  if(response.status === 200) {
-    return json.date
-  }
+	const response = await fetch('/api/latest-data-date');
+	const json = await response.json();
+
+	if (response.status === 200) {
+		return json.date;
+	}
+}
+
+/**
+ * @param {string} apiUrl - append with /api/
+ * @param {Object} params - append with /api/
+ */
+export async function fetchHelper(apiUrl, params = null) {
+	let response;
+	if (params) {
+		const urlParams = new URLSearchParams();
+		for (const [key, value] of Object.entries(params)) {
+			urlParams.set(key, value);
+		}
+		response = await window.fetch('/api/' + apiUrl + '?' + urlParams.toString());
+	} else {
+		response = await window.fetch('/api/' + apiUrl);
+	}
+
+	const json = await response.json();
+
+	if (response.status === 200) {
+		return json.data;
+	}
 }
