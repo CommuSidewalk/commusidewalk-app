@@ -33,11 +33,21 @@ export type LatLng = [number, number];
 export type EventPoint = {
 	event_id: number;
 	accident_category_name: string;
-	occurrence_date: Date;
-	longitude: string;
 	latitude: string;
-	color: string;
+	longitude: string;
+	number_of_deaths: number;
+	number_of_injuries: number;
+	occurrence_date: Date;
 };
+
+// export type EventPoint = {
+// 	event_id: number;
+// 	accident_category_name: string;
+// 	occurrence_date: Date;
+// 	longitude: string;
+// 	latitude: string;
+// 	color: string;
+// };
 
 export type EventGeneral = {
 	event_id: number;

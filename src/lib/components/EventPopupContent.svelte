@@ -20,7 +20,6 @@
 
 	fetchHelper('general-events/' + evPoint.event_id).then((gv) => {
 		generalView = gv;
-		console.log(generalView);
 	});
 </script>
 
@@ -29,7 +28,7 @@
 		<table>
 			<tr>
 				<th>死傷人數</th>
-				<td>{generalView.number_of_deaths + '死' + generalView.number_of_injuries + '傷'}</td>
+				<td>{evPoint.number_of_deaths + '死' + evPoint.number_of_injuries + '傷'}</td>
 			</tr>
 			<tr>
 				<th>發生時間</th>
@@ -58,10 +57,7 @@
 			</tr>
 			<tr>
 				<th>事故原因</th>
-				<td
-					>{generalView.accident_type_and_category_main_category_name}
-					{generalView.accident_type_and_category_sub_category_name}</td
-				>
+				<td> {generalView.accident_type_and_category_sub_category_name}</td>
 			</tr>
 		</table>
 	{:else}

@@ -1,39 +1,27 @@
-<script>
-	import { onDestroy } from 'svelte';
-
-	export let intervalMs = 300;
-	let loading = [0, 0, 0];
-
-	const interval = setInterval(() => {
-		if (loading.length === 3) {
-			loading = [];
-		} else {
-			loading.push(0);
-			loading = loading;
-		}
-	}, intervalMs);
-
-	onDestroy(() => clearInterval(interval));
-</script>
-
-<div class="loading">
-	<div class="centered">
-		<span>載入中</span>
-		{#each loading as i}
-			<span>.</span>
-		{/each}
-	</div>
-</div>
+<div class="loading-spinner"></div>
 
 <style>
-	.loading {
-		position: fixed;
-		width: 100%;
-		height: 100%;
-	}
-	.centered {
-		position: fixed; /* or absolute */
-		top: 50%;
-		left: 50%;
-	}
+.loading-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  z-index: 999;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 </style>

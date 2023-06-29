@@ -6,6 +6,8 @@
 	import a1Point from '$lib/assets/a1_point.png';
 	import a2Point from '$lib/assets/a2_point.png';
 	import OnlineVisitorCount from './OnlineVisitorCount.svelte';
+	import { PUBLIC_ACCIDENT_END_DATE, PUBLIC_ACCIDENT_START_DATE } from '$env/static/public';
+	import { toZhTwDateString } from '$lib/utils/date-utils';
 
 	export let a1Layer;
 	export let a2Layer;
@@ -102,9 +104,14 @@
 			<p>※2：造成人員受傷或超過24時死亡之交通事故。</p>
 		</div>
 	{/if}
-  <div class="block">
-    <OnlineVisitorCount/>
-  </div>
+	<div class="block">
+		<OnlineVisitorCount />
+			<p>
+				資料範圍：{toZhTwDateString(PUBLIC_ACCIDENT_START_DATE)}～{toZhTwDateString(
+					PUBLIC_ACCIDENT_END_DATE
+				)}
+			</p>
+	</div>
 	<slot />
 </div>
 
