@@ -1,6 +1,7 @@
 <script>
 	import { createEventDispatcher, setContext } from 'svelte';
 	import 'leaflet/dist/leaflet.css';
+  import lassImage from '$lib/assets/logo-lass.jpg';
 
 	export let height = '100%';
 	export let width = '100%';
@@ -65,10 +66,20 @@
 	{#if map}
 		<slot {map} />
 	{/if}
+  <img class="logo" src={lassImage} alt="LASS Logo"/>
 </div>
 
 <style>
 	:global(.leaflet-control-container) {
 		position: static;
 	}
+  .logo {
+    position: absolute;
+    z-index: 999;
+    width: 10em;
+    bottom: 1.5em;
+    left: 0.5em;
+    border-radius: 0.5em;
+    pointer-events: none;
+  }
 </style>
