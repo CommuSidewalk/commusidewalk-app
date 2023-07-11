@@ -7,6 +7,8 @@ import { Readable } from 'node:stream';
 
 const cache = new TimeCache();
 
+// 已知BUG：如果沒有資料，前端會一直loading
+
 const columns = [
 	'event_id',
 	'accident_category_name',

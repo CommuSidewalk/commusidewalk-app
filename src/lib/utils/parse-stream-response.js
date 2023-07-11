@@ -1,5 +1,3 @@
-import { isNaN } from 'lodash';
-
 export async function parseStreamResponse(response, cb, onEnd) {
 	const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
 	let accumulatedData = '';
@@ -23,11 +21,6 @@ export async function parseStreamResponse(response, cb, onEnd) {
 				number_of_injuries: parseInt(eventPointCSVList[5]),
 				occurrence_date: new Date(eventPointCSVList[6])
 			};
-			if (isNaN(evPoint.number_of_injuries)) {
-				console.log(evPoint);
-				console.table(csv);
-				console.table(csvList);
-			}
 			cb(evPoint);
 		}
 	}
