@@ -106,11 +106,11 @@
 	{/if}
 	<div class="block">
 		<OnlineVisitorCount />
-			<p>
-				資料範圍：{toZhTwDateString(PUBLIC_ACCIDENT_START_DATE)}～{toZhTwDateString(
-					PUBLIC_ACCIDENT_END_DATE
-				)}
-			</p>
+		<p>
+			資料範圍：{toZhTwDateString(PUBLIC_ACCIDENT_START_DATE)}～{toZhTwDateString(
+				PUBLIC_ACCIDENT_END_DATE
+			)}
+		</p>
 	</div>
 	<slot />
 </div>

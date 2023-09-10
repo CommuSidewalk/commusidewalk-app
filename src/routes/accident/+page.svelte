@@ -13,7 +13,7 @@
 	let a1Layer;
 	let a2Layer;
 	let map;
-  let isLoading = true;
+	let isLoading = true;
 
 	/** @type {import('$lib/types').LatLng} */
 	const initialView = [25.0453, 121.5403]; // 初始經緯度，台北市某處
@@ -77,12 +77,12 @@
 		}
 		a1Layer.clearLayers();
 		a2Layer.clearLayers();
-    isLoading = true;
+		isLoading = true;
 
 		const response = await fetchHelper('general-events', params, true);
 		parseStreamResponse(response, addEventPointToLayer, () => {
-      isLoading = false;
-    });
+			isLoading = false;
+		});
 	}
 
 	function handleFilterDateRange(e) {
@@ -103,7 +103,7 @@
 <svelte:window on:resize={resizeMap} />
 
 {#if isLoading}
-<Loading />
+	<Loading />
 {/if}
 <Leaflet bind:map view={initialView} zoom={13} maxZoom={19} {attribution}>
 	<Control position="topright">

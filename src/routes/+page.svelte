@@ -41,7 +41,7 @@
 				color: rank2Color(point.rankA1),
 				fillOpacity: 0.7,
 				stroke: true,
-        strokeOpacity: 0.9,
+				strokeOpacity: 0.9,
 				radius: 5
 			}).addTo(layer);
 

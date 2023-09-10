@@ -24,5 +24,5 @@ export async function parseStreamResponse(response, cb, onEnd) {
 			cb(evPoint);
 		}
 	}
-  onEnd();
+	onEnd();
 }
