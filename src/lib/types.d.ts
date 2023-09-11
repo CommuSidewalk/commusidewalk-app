@@ -145,3 +145,49 @@ export type EventDetailView = {
 	cause_classification_sub_category_name_individual: string;
 	hit_and_run_category_name: string;
 };
+
+export type DotTaipeiPoint = {
+	imgName: string;
+	lat: number;
+	lng: number;
+	dataTime: Date;
+	remark: string;
+	uploader: string;
+	marker: string;
+	checker: string;
+	label: string;
+	createdAt: Date;
+	updatedAt: Date;
+	sidewalk: string;
+	protective: string;
+	wheelchair: string;
+	occupation: string;
+	walkRisk: string;
+	riskRate: string;
+	purpose: string;
+	imgUrl: string;
+	_id: string;
+	rankA1: number;
+	rankB1: number;
+	rankC1: number;
+	countyName: string;
+	townName: string;
+	villName: string;
+	villCode: string;
+};
+
+export type DotTaipeiImage = {
+	resourcePath: string;
+	description: string;
+	timestamp: number;
+};
+
+export type DotTaipeiPoint = {
+	title: string;
+	description: string;
+	lat: number;
+	lng: number;
+	images: DotTaipeiImage[];
+	author: string;
+	type: string;
+};

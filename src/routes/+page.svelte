@@ -4,6 +4,7 @@
 	import Leaflet from '$lib/components/Leaflet.svelte';
 	import ControlPanel from '$lib/components/ControlPanel.svelte';
 	import SidewalkPopupContent from '$lib/components/SidewalkPopupContent.svelte';
+	import DotTaipeiPopupContent from '$lib/components/DotTaipeiPopupContent.svelte';
 	import { rank2Color } from '$lib/utils/rank2Color.js';
 	import { fetchDateRangeData } from '$lib/utils/fetch-data.js';
 	import '$lib/css/MarkerCluster.css';
@@ -11,12 +12,14 @@
 	import UpdateDate from '$lib/components/UpdateDate.svelte';
 	import _ from 'lodash';
 	import CircleMarker from '$lib/components/CircleMarker.svelte';
+	import dotTaipeiLocationIndicator from '$lib/assets/dot_taipei_location_indicator.png';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
 
 	let map;
 	let villageLayer;
+	let dotTaipeiLayer;
 	let sidewalkLayer;
 
 	/** @type {import('$lib/types').LatLng} */
@@ -33,7 +36,7 @@
 	 * @param {import('$lib/types.d.ts').SidewalkPoint[]} points - sidewalk points.
 	 * @param {Object} layer - Leaflet Layer.
 	 */
-	function addPointsToLayer(points, layer) {
+	function addSidewalkPointsToLayer(points, layer) {
 		if (!L) return;
 
 		points.forEach((point) => {
@@ -58,12 +61,49 @@
 		});
 	}
 
+	/**
+	 * Add dot taipei points into map layer.
+	 * @param {import('$lib/types.d.ts').DotTaipeiPoint[]} points - dot taipei points.
+	 * @param {Object} layer - Leaflet Layer.
+	 */
+	function addDotTaipeiPointsToLayer(points, layer) {
+		if (!L) return;
+		const dotTaipeiIndicatorIcon = L.icon({
+			iconUrl: dotTaipeiLocationIndicator,
+			shadowUrl: 'leaf-shadow.png',
+
+			iconSize: [40, 62], // size of the icon
+			shadowSize: [0, 0], // size of the shadow
+			iconAnchor: [20, 94], // point of the icon which will correspond to marker's location
+			shadowAnchor: [0, 0], // the same for the shadow
+			popupAnchor: [0, -76] // point from which the popup should open relative to the iconAnchor
+		});
+
+		points.forEach((point) => {
+			if (point.lat && point.lng) {
+				const marker = window.L.marker([point.lat, point.lng], {
+					icon: dotTaipeiIndicatorIcon
+				}).addTo(layer);
+
+				marker.bindPopup(() => {
+					const container = window.L.DomUtil.create('div');
+					new DotTaipeiPopupContent({
+						target: container,
+						props: { ...point }
+					});
+
+					return container;
+				});
+			}
+		});
+	}
+
 	async function handleFilterDateRange(e) {
 		if (!sidewalkLayer) return;
 		const { start, end } = e.detail;
 		const filteredData = await fetchDateRangeData(fetch, start, end);
 		sidewalkLayer.clearLayers();
-		addPointsToLayer(filteredData, sidewalkLayer);
+		addSidewalkPointsToLayer(filteredData, sidewalkLayer);
 	}
 
 	async function initLeaflet() {
@@ -87,7 +127,7 @@
 		});
 
 		map.addLayer(sidewalkLayer);
-		addPointsToLayer(data.sidewalkData, sidewalkLayer);
+		addSidewalkPointsToLayer(data.sidewalkData, sidewalkLayer);
 
 		// WMTS 村里界圖層
 		villageLayer = window.L.tileLayer(
@@ -96,6 +136,11 @@
 				maxZoom: 19
 			}
 		).addTo(map);
+
+		// 台北市行人安全友善環境改善標的
+		dotTaipeiLayer = window.L.layerGroup();
+		addDotTaipeiPointsToLayer(data.dotTaipeiData, dotTaipeiLayer);
+		map.addLayer(dotTaipeiLayer);
 	}
 
 	const attribution =
@@ -113,7 +158,7 @@
 {/if}
 <Leaflet bind:map view={initialView} zoom={13} maxZoom={19} {attribution}>
 	<Control position="topright">
-		<ControlPanel {villageLayer} on:filter-date-range={handleFilterDateRange}>
+		<ControlPanel {villageLayer} {dotTaipeiLayer} on:filter-date-range={handleFilterDateRange}>
 			{#if data.sidewalkData}
 				<div>標註總數：{data.sidewalkData.length}</div>
 				<UpdateDate />

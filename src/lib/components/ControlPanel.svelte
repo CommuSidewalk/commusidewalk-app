@@ -6,10 +6,12 @@
 	import { onGetUserLatLng } from '$lib/utils/onGetUserLatLng';
 	import OnlineVisitorCount from './OnlineVisitorCount.svelte';
 
-	export let villageLayer = undefined;
+	export let villageLayer;
+	export let dotTaipeiLayer;
 
 	let map = getContext('map')();
 	let showVillageLayer = false;
+	let showDotTaipeiLayer = true;
 	let show = false;
 
 	const dispatch = createEventDispatcher();
@@ -19,6 +21,14 @@
 			map.addLayer(villageLayer);
 		} else {
 			map.removeLayer(villageLayer);
+		}
+	}
+
+	$: if (map && dotTaipeiLayer) {
+		if (showDotTaipeiLayer) {
+			map.addLayer(dotTaipeiLayer);
+		} else {
+			map.removeLayer(dotTaipeiLayer);
 		}
 	}
 
@@ -47,6 +57,8 @@
 				</div>
 				<input id="toggleVillageLayer" type="checkbox" bind:checked={showVillageLayer} />
 				<label for="toggleVillageLayer">顯示村里界</label>
+				<input id="toggleDotTaipeiLayer" type="checkbox" bind:checked={showDotTaipeiLayer} />
+				<label for="toggleDotTaipeiLayer">顯示臺北市行人友善改善標的</label>
 			{/if}
 		</div>
 		<div class="block">
