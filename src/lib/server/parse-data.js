@@ -14,23 +14,28 @@ const cache = new TimeCache();
  *
  */
 async function parse() {
-	const response = await fetch(CSV_DOWNLOAD_URL);
-	const csv = await response.text();
-	const results = Papa.parse(csv, {
-		skipEmptyLines: true,
-		header: true
-	});
-	return results.data.map((item) => {
-		return {
-			...item,
-			rankA1: parseFloat(item.rankA1),
-			rankB1: parseFloat(item.rankB1),
-			rankC1: parseFloat(item.rankC1),
-			dataTime: new Date(item.dataTime),
-			createdAt: new Date(item.createdAt),
-			updatedAt: new Date(item.updatedAt)
-		};
-	});
+  try {
+    const response = await fetch(CSV_DOWNLOAD_URL);
+    const csv = await response.text();
+    const results = Papa.parse(csv, {
+      skipEmptyLines: true,
+      header: true
+    });
+    return results.data.map((item) => {
+      return {
+        ...item,
+        rankA1: parseFloat(item.rankA1),
+        rankB1: parseFloat(item.rankB1),
+        rankC1: parseFloat(item.rankC1),
+        dataTime: new Date(item.dataTime),
+        createdAt: new Date(item.createdAt),
+        updatedAt: new Date(item.updatedAt)
+      };
+    });
+  } catch(e) {
+    console.error(e)
+    throw new Error("Cannot parse csv data for link: " + CSV_DOWNLOAD_URL);
+  }
 }
 
 /**
